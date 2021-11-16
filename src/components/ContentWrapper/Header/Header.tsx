@@ -11,6 +11,7 @@ import 'styles/mixinsAndVars.scss';
 const HeaderContainer = styled.header`
   margin: 20px;
   display: flex;
+  justify-content: space-between;
 `;
 
 const Header = () => {
