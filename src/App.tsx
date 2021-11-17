@@ -1,23 +1,26 @@
-import Sidebar from 'components/ContentWrapper/Main/MainSection/Navigation/Sidebar';
 import React from 'react';
-import {
-  BrowserRouter
-} from "react-router-dom";
+import { Route, Routes } from 'react-router-dom';
 
-import Header from './components/ContentWrapper/Header/Header';
-import Main from './components/ContentWrapper/Main/Main';
+import ContentLayout from 'components/ContentLayout/ContentLayout';
+import GameList from 'components/ContentLayout/Main/MainSection/GameList/GameList';
+import Game from 'components/ContentLayout/Main/MainSection/GameList/Game';
+import Other from 'components/ContentLayout/Main/MainSection/GameList/Other';
 
 import './_global.scss';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Header />
-      <Main />
-    </BrowserRouter>
+    <>
+      <Routes>
+        <Route path="/" element={<ContentLayout />}>
+          <Route index element={<GameList />} />
+          <Route path="platforms" element={<Game />} />
+          <Route path="stores" element={<Other />} />
+        </Route>
+        <Route path="*" element={<p>Not found page</p>} />
+      </Routes>
+    </>
   );
 }
-
-
 
 export default App;
