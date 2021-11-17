@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 import styled from 'styled-components';
 import 'styles/mixinsAndVars.scss';
@@ -19,6 +20,9 @@ const Sidebar = () => {
   return (
     <SidebarContainer>
       <button onClick={getData}>Get data</button>
+      <Link to="/">Home</Link> |{" "}
+      <Link to="gamelist">gamelist</Link>
+      <Link to="stores">Stores</Link>
     </SidebarContainer>
   );
 };

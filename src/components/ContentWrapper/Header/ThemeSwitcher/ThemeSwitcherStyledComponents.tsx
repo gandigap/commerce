@@ -12,7 +12,7 @@ export const ThemeSwitcherLabel = styled.label`
   display: inline-block;
   font-size: 20px;
   background-color: var(--color-4);
-  border-radius: 1em;
+  border-radius: 10px;  
 `;
 
 export const ThemeSwitcherInput = styled.input`
@@ -23,18 +23,17 @@ export const ThemeSwitcherInput = styled.input`
     -webkit-transform: translate3d(100%, 0, 0);
     -moz-transform: translate3d(100%, 0, 0);
     transform: translate3d(100%, 0, 0);
-    background: var(--color-1);
+    background: var(--color-5);
   }
 `;
 
 export const ThemeSwitcherIcon = styled.div`
-  height: 1em;
-  width: 1em;
-  border-radius: 1em;
-  background-color: var(--color-1);
-  box-shadow: 0 0.1em 0.3em var(--color-5);
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+  background-color: var(--color-5);
+  box-shadow: 0px 0px 3px 2px var(--color-5);
   -webkit-transition: all 300ms;
   -moz-transition: all 300ms;
-  transition: all 300ms;
-  cursor: pointer;
+  transition: all 300ms;  
 `;
