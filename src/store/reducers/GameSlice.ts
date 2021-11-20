@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IGame } from 'models/IGame';
+import { fetchGames } from './ActionCreators';
 
 interface GameState {
   games: IGame[];
@@ -33,6 +34,20 @@ export const gameSlice = createSlice({
     },
     increment(state, action: PayloadAction<number>) {
       state.count += action.payload;
+    },
+  },
+  extraReducers: {
+    [fetchGames.fulfilled.type]: (state, action: PayloadAction<IGame[]>) => {
+      state.isLoading = false;
+      state.error = '';
+      state.games = action.payload;
+    },
+    [fetchGames.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [fetchGames.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
+      state.error = action.payload;
     },
   },
 });
