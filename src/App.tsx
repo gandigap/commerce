@@ -10,16 +10,14 @@ import './_global.scss';
 
 function App() {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<ContentLayout />}>
-          <Route index element={<GameList />} />
-          <Route path="platforms" element={<Game />} />
-          <Route path="stores" element={<Other />} />
-        </Route>
-        <Route path="*" element={<p>Not found page</p>} />
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/" element={<ContentLayout />}>
+        <Route index element={<GameList />} />
+        <Route path="platforms" element={<Game />} />
+        <Route path="stores" element={<Other />} />
+      </Route>
+      <Route path="*" element={<p>Not found page</p>} />
+    </Routes>
   );
 }
 

@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { IGame } from 'models/IGame';
 
 const getData = (type: string) => {
-  let data = null;
+  let data: IGame[] = [];
   axios
     .get(`https://api.rawg.io/api/${type}?`, {
       params: {
