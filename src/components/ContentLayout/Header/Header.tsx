@@ -5,24 +5,26 @@ import ThemeSwitcher from './ThemeSwitcher/ThemeSwitcher';
 import SearchInput from './SearchInput/SearchInput';
 import LoginContent from './LoginContent/LoginContent';
 
-import styled from 'styled-components';
-import 'styles/mixinsAndVars.scss';
+import { Layout, Menu, Row } from 'antd';
 
-const HeaderContainer = styled.header`
-  margin: 20px;
-  display: flex;
-  justify-content: space-between;
-`;
+const { Header } = Layout;
 
-const Header = () => {
+const _Header = () => {
   return (
-    <HeaderContainer>
-      <ThemeSwitcher />
-      <Logo />
-      <SearchInput />
-      <LoginContent />
-    </HeaderContainer>
+    <Header className="header">
+      <Row>
+        <ThemeSwitcher />
+        <Logo />
+        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+          <Menu.Item key="1">nav 1</Menu.Item>
+          <Menu.Item key="2">nav 2</Menu.Item>
+          <Menu.Item key="3">nav 3</Menu.Item>
+        </Menu>
+        <SearchInput />
+        <LoginContent />
+      </Row>
+    </Header>
   );
 };
 
-export default Header;
+export default _Header;

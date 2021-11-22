@@ -1,23 +1,21 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import styled from 'styled-components';
-import 'styles/mixinsAndVars.scss';
-
-import Header from './Header/Header';
+import _Header from './Header/Header';
 import Sidebar from './Main/MainSection/Sidebar/Sidebar';
 
-const MainContainer = styled.main`
-  display: flex;
-`;
+import { Layout, Menu, Breadcrumb } from 'antd';
+import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+
+const { SubMenu } = Menu;
+const { Header, Content, Sider } = Layout;
 
 const ContentLayout = () => {
   return (
     <>
-      <Header />
-      <MainContainer>
-        <Sidebar />
-        <Outlet />
-      </MainContainer>
+      <_Header />
+
+      <Sidebar />
+      <Outlet />
     </>
   );
 };
