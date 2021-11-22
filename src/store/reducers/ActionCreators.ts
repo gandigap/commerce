@@ -1,10 +1,9 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { IGames } from 'models/IGame';
 import { AppDispatch } from 'store/store';
 import { gameSlice } from './GameSlice';
 
-/* export const fetchGames = () => async (dispatch: AppDispatch) => {
+export const fetchGames = () => async (dispatch: AppDispatch) => {
   console.log('start');
   try {
     dispatch(gameSlice.actions.gamesFetching());
@@ -20,19 +19,4 @@ import { gameSlice } from './GameSlice';
   } catch (e: any) {
     dispatch(gameSlice.actions.gamesFetchingError(e.message));
   }
-}; */
-
-export const fetchGames = createAsyncThunk('games/fetchAll', async (_, thunkAPI) => {
-  try {
-    const response = await axios.get<IGames>(`https://api.rawg.io/api/games?`, {
-      params: {
-        key: 'dc31c2a55aa444959f74eb7bc96b0617',
-        page: 1,
-        page_size: 30,
-      },
-    });
-    return response.data.results;
-  } catch (error) {
-    return thunkAPI.rejectWithValue(`Can not download. ${error} `);
-  }
-});
+};

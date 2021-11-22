@@ -6,8 +6,6 @@ import { setupStore } from 'store/store';
 
 import App from './App';
 
-import 'antd/dist/antd.css';
-
 const store = setupStore();
 ReactDOM.render(
   <Provider store={store}>

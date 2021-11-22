@@ -4,30 +4,30 @@ import styled from 'styled-components';
 import 'styles/mixinsAndVars.scss';
 
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import { gameSlice } from 'store/reducers/GameSlice';
 import { fetchGames } from 'store/reducers/ActionCreators';
 import { IGame } from 'models/IGame';
+import GameCard from './GameCard.tsx/GameCard';
 
-const GameListContainer = styled.div``;
+const GameListContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
 
 const GameList = () => {
-  const { games, isLoading, error, count } = useAppSelector((state) => state.gameReducer);
-  const { increment } = gameSlice.actions;
+  const { games, isLoading, error } = useAppSelector((state) => state.gameReducer);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log('yes');
-    dispatch(fetchGames());
-  }, [dispatch]);
+    games.length === 0 && dispatch(fetchGames());
+  }, [dispatch, games.length]);
 
   return (
     <GameListContainer>
-      <h1>{count}</h1>
-      <button onClick={() => dispatch(increment(5))}>Click count</button>
       {isLoading && <h3>Идет загрузка</h3>}
       {error && <h3>{error}</h3>}
       {games.map((game: IGame) => (
-        <p key={game.id}>{game.name}</p>
+        <GameCard key={game.id} gameData={game} />
       ))}
     </GameListContainer>
   );

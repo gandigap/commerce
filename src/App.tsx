@@ -1,11 +1,10 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { ConfigProvider } from 'antd';
 
-import ContentLayout from 'components/ContentLayout/ContentLayout';
-import GameList from 'components/ContentLayout/Main/MainSection/GameList/GameList';
-import PlatformList from 'components/ContentLayout/Main/MainSection/GameList/PlatformList';
-import Other from 'components/ContentLayout/Main/MainSection/GameList/Other';
+import ContentLayout from 'components/MainContentLayout/MainContentLayout';
+import GameList from 'components/MainContentLayout/GameList/GameList';
+import PlatformList from 'components/MainContentLayout/GameList/PlatformList';
+import Other from 'components/MainContentLayout/GameList/Other';
 
 import './_global.scss';
 
