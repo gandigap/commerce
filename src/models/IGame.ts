@@ -1,9 +1,10 @@
 export interface IGame {
   added: number;
   background_image: string;
-  genres: object[];
+  genres: [{ [key: string]: number }];
   id: number;
   name: string;
+  metacritic: number;
   parent_platforms: object[];
   rating: number;
   released: string;

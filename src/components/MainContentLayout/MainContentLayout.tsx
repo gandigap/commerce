@@ -13,7 +13,7 @@ const MainContainer = styled.main`
 `;
 
 const SectionContainer = styled.section`
-  padding: 0 10px;
+  flex-grow: 1;
 `;
 
 const ContentLayout = () => {

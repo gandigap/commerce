@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import 'styles/mixinsAndVars.scss';
 
 const SidebarContainer = styled.div`
-  width: 150px;
+  min-width: 200px;
   height: 250px;
   border-right: 1px solid black;
 `;
