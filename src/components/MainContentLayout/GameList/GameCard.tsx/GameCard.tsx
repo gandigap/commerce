@@ -1,22 +1,34 @@
 import React from 'react';
 
 import { IGame } from 'models/IGame';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { faMobile, faGamepad } from '@fortawesome/free-solid-svg-icons';
+import {
+  faLinux,
+  faApple,
+  faWindows,
+  faXbox,
+  faPlaystation,
+  faAndroid,
+} from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import styled from 'styled-components';
 
 const GameCardWrapper = styled.div`
-  border: 1px solid var(--color-4);
-  background-color: var(--color-3);
-`;
-
-const GameCardWrapperContent = styled.div`
+  margin: 0 10px;
   overflow: hidden;
+  border: 1px solid var(--color-3);
+  border-radius: 20px;
+  background-color: var(--color-2);
+
   &:hover {
     transition: all 0.3s;
     transform: scale(1.05);
   }
+`;
+
+const GameCardWrapperContent = styled.div`
+  overflow: hidden;
 `;
 
 const GameCardMedia = styled.div`
@@ -34,7 +46,25 @@ const GameCardImagePreview = styled.div`
 `;
 
 const GameCardInfo = styled.div`
-  background-color: var(--color-2);
+  padding: 5px;
+`;
+
+const GameCardInfoPlatformsAndRateContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+const GameCardInfoPlatforms = styled.div`
+  font-size: 16px;
+
+  .fontawesome__icon {
+    margin: 2px;
+  }
+`;
+
+const GameCardInfoRate = styled.div`
+  font-weigth: bold;
+  color: var(--color-info);
+  border: 1px solid var(--color-info);
 `;
 
 const GameCardInfoTitle = styled.h3`
@@ -42,17 +72,50 @@ const GameCardInfoTitle = styled.h3`
 `;
 
 const GameCardInfoGenres = styled.div`
-  font-size: 12px;
-
-  &:hover svg {
-    fill: red;
-  }
+  color: var(--color-4);
 `;
 interface IGameCard {
   gameData: IGame;
 }
-const element = <FontAwesomeIcon icon={faCoffee} spin />;
+
 const GameCard = ({ gameData }: IGameCard) => {
+  const genres = gameData.genres.map((genre: any) => {
+    return <span>{genre.name}</span>;
+  });
+
+  const getPlatformType = (type: string) => {
+    switch (type) {
+      case 'pc':
+        return faWindows;
+      case 'playstation':
+        return faPlaystation;
+      case 'xbox':
+        return faXbox;
+      case 'mac':
+        return faApple;
+      case 'linux':
+        return faLinux;
+      case 'ios':
+        return faMobile;
+      case 'android':
+        return faAndroid;
+      case 'nintendo':
+        return faGamepad;
+      default:
+        return faGamepad;
+    }
+  };
+
+  const platforms = gameData.parent_platforms.map((parent_platform: any) => {
+    return (
+      <FontAwesomeIcon
+        key={`${gameData.id}_${parent_platform.platform.slug}`}
+        icon={getPlatformType(parent_platform.platform.slug)}
+        className="fontawesome__icon"
+      />
+    );
+  });
+
   return (
     <GameCardWrapper>
       <GameCardWrapperContent>
@@ -64,13 +127,14 @@ const GameCard = ({ gameData }: IGameCard) => {
           />
         </GameCardMedia>
         <GameCardInfo>
+          <GameCardInfoPlatformsAndRateContainer>
+            <GameCardInfoPlatforms>{platforms}</GameCardInfoPlatforms>
+            <GameCardInfoRate title={'Metascore'}>{gameData.metacritic}</GameCardInfoRate>
+          </GameCardInfoPlatformsAndRateContainer>
           <GameCardInfoTitle>{gameData.name}</GameCardInfoTitle>
           <GameCardInfoGenres>
             Genres
-            {gameData.genres.map((genre: any) => {
-              return <span>{genre.name}</span>;
-            })}
-            {element}
+            {genres}
           </GameCardInfoGenres>
         </GameCardInfo>
       </GameCardWrapperContent>
