@@ -8,6 +8,7 @@ export interface IGame {
   parent_platforms: object[];
   rating: number;
   released: string;
+  short_screenshots: object[];
 }
 
 export interface IGames {

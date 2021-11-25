@@ -7,7 +7,6 @@ import 'styles/mixinsAndVars.scss';
 const SidebarContainer = styled.div`
   min-width: 200px;
   height: 250px;
-  border-right: 1px solid black;
 `;
 
 const Sidebar = () => {
