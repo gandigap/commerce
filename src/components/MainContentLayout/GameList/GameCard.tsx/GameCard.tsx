@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 
 import { IGame } from 'models/IGame';
 import { faMobile, faGamepad } from '@fortawesome/free-solid-svg-icons';
@@ -11,11 +12,12 @@ import {
   faAndroid,
 } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import AwesomeSlider from 'react-awesome-slider';
 
 import styled from 'styled-components';
-
-import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/src/styles';
+import { gameSlice } from 'store/reducers/GameSlice';
+import { useAppDispatch } from 'hooks/redux';
 
 const GameCardWrapper = styled.div`
   margin: 10px 0px;
@@ -103,7 +105,8 @@ const GameCardInfoTitle = styled.h3`
 `;
 
 const GameCardGenres = styled.div`
-display:flex:
+  display: flex;
+  justify-content: space-between;
 
   color: var(--color-4);
 `;
@@ -113,6 +116,9 @@ interface IGameCard {
 
 const GameCard = ({ gameData }: IGameCard) => {
   const [hoverState, setHoverState] = useState(false);
+  const { setCurrentGameId } = gameSlice.actions;
+  const dispatch = useAppDispatch();
+
   const genres = gameData.genres.map((genre: any) => {
     return <span key={`${gameData.id}_${genre.name}`}>{genre.name}</span>;
   });
@@ -142,6 +148,10 @@ const GameCard = ({ gameData }: IGameCard) => {
         return faGamepad;
     }
   };
+
+  const handlerClick = useCallback(() => {
+    dispatch(setCurrentGameId(gameData.id));
+  }, [dispatch, gameData.id, setCurrentGameId]);
 
   const platforms = gameData.parent_platforms.map((parent_platform: any) => {
     const slug: string = parent_platform.platform.slug;
@@ -178,7 +188,9 @@ const GameCard = ({ gameData }: IGameCard) => {
             <GameCardInfoPlatforms>{platforms}</GameCardInfoPlatforms>
             <GameCardInfoRate title={'Metascore'}>{gameData.metacritic}</GameCardInfoRate>
           </GameCardInfoPlatformsAndRateContainer>
-          <GameCardInfoTitle>{gameData.name}</GameCardInfoTitle>
+          <Link to={`/games/${gameData.name}`} onClick={handlerClick}>
+            <GameCardInfoTitle>{gameData.name}</GameCardInfoTitle>
+          </Link>
         </GameCardInfo>
         <GameCardAdditionalInfo>
           <GameCardGenres>

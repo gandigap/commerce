@@ -7,6 +7,7 @@ import PlatformList from 'components/MainContentLayout/GameList/PlatformList';
 import Other from 'components/MainContentLayout/GameList/Other';
 
 import './_global.scss';
+import GameLayout from 'components/MainContentLayout/GameList/GameLayout';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="platforms" element={<PlatformList />} />
         <Route path="stores" element={<Other />} />
       </Route>
+      <Route path="games/:id" element={<GameLayout />} />
       <Route path="*" element={<p>Not found page</p>} />
     </Routes>
   );

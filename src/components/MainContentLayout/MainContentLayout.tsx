@@ -1,5 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+
 import styled from 'styled-components';
 import 'styles/mixinsAndVars.scss';
 
@@ -16,7 +17,7 @@ const SectionContainer = styled.section`
   flex-grow: 1;
 `;
 
-const ContentLayout = () => {
+const MainContentLayout = () => {
   return (
     <>
       <Header />
@@ -31,4 +32,4 @@ const ContentLayout = () => {
   );
 };
 
-export default ContentLayout;
+export default MainContentLayout;
