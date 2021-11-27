@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IGames } from 'models/IGame';
+import { IGamePrimary, IGames } from 'models/IGame';
 import { AppDispatch } from 'store/store';
 import { gameSlice } from './GameSlice';
 
@@ -20,13 +20,12 @@ export const fetchGames = () => async (dispatch: AppDispatch) => {
   }
 };
 
-/* export const fetchGame = (id: number) => async (dispatch: AppDispatch) => {
-  
+export const fetchGame = (id: number) => async (dispatch: AppDispatch) => {
   try {
     dispatch(gameSlice.actions.gamesFetching());
-    const response = await axios.get<IGames>(`https://api.rawg.io/api/games/${id}?`, {
+    const response = await axios.get<IGamePrimary>(`https://api.rawg.io/api/games/${id}?`, {
       params: {
-        key: 'dc31c2a55aa444959f74eb7bc96b0617',       
+        key: 'dc31c2a55aa444959f74eb7bc96b0617',
       },
     });
     console.log(response.data, 'data');
@@ -34,4 +33,4 @@ export const fetchGames = () => async (dispatch: AppDispatch) => {
   } catch (e: any) {
     dispatch(gameSlice.actions.gamesFetchingError(e.message));
   }
-}; */
+};

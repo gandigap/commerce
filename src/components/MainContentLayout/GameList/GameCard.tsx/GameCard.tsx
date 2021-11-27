@@ -1,23 +1,13 @@
-import React, { useState, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 
-import { IGame } from 'models/IGame';
-import { faMobile, faGamepad } from '@fortawesome/free-solid-svg-icons';
-import {
-  faLinux,
-  faApple,
-  faWindows,
-  faXbox,
-  faPlaystation,
-  faAndroid,
-} from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import AwesomeSlider from 'react-awesome-slider';
+import { IGameCardProps } from 'models/IGame';
 
 import styled from 'styled-components';
 import 'react-awesome-slider/src/styles';
-import { gameSlice } from 'store/reducers/GameSlice';
-import { useAppDispatch } from 'hooks/redux';
+
+import GameCardMedia from './GameCardMedia';
+import GameCardMainInfo from './GameCardMainInfo';
+import GameCardAdditionalInfo from './GameCardAdditionalInfo';
 
 const GameCardWrapper = styled.div`
   margin: 10px 0px;
@@ -54,150 +44,17 @@ const GameCardWrapperContent = styled.div`
   overflow: hidden;
 `;
 
-const GameCardMedia = styled.div`
-  position: relative;
-  padding-bottom: 60%;
-`;
-
-const GameCardImagePreview = styled.div`
-  height: 100%;
-  background-position: 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  position: absolute;
-  width: 100%;
-`;
-
-const GameCardMediaSlider = styled.div`
-  position: absolute;
-`;
-
-const GameCardInfo = styled.div`
-  padding: 5px;
-`;
-
-const GameCardAdditionalInfo = styled.div`
-  padding: 5px;
-`;
-
-const GameCardInfoPlatformsAndRateContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-const GameCardInfoPlatforms = styled.div`
-  font-size: 16px;
-
-  .fontawesome__icon {
-    margin: 2px;
-  }
-`;
-
-const GameCardInfoRate = styled.div`
-  padding: 2px;
-  border-radius: 100%;
-  border: 1px solid var(--color-info);
-  font-weight: bold;
-  color: var(--color-info);
-`;
-
-const GameCardInfoTitle = styled.h3`
-  font-size: 24px;
-`;
-
-const GameCardGenres = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  color: var(--color-4);
-`;
-interface IGameCard {
-  gameData: IGame;
-}
-
-const GameCard = ({ gameData }: IGameCard) => {
+const GameCard: React.FC<IGameCardProps> = ({ gameData }) => {
   const [hoverState, setHoverState] = useState(false);
-  const { setCurrentGameId } = gameSlice.actions;
-  const dispatch = useAppDispatch();
-
-  const genres = gameData.genres.map((genre: any) => {
-    return <span key={`${gameData.id}_${genre.name}`}>{genre.name}</span>;
-  });
-
-  const sliders = gameData.short_screenshots.map((screenshotData: any) => {
-    return <div key={`${gameData.id}_${screenshotData.id}`} data-src={`${screenshotData.image}`} />;
-  });
-  const getPlatformType = (type: string) => {
-    switch (type) {
-      case 'pc':
-        return faWindows;
-      case 'playstation':
-        return faPlaystation;
-      case 'xbox':
-        return faXbox;
-      case 'mac':
-        return faApple;
-      case 'linux':
-        return faLinux;
-      case 'ios':
-        return faMobile;
-      case 'android':
-        return faAndroid;
-      case 'nintendo':
-        return faGamepad;
-      default:
-        return faGamepad;
-    }
-  };
-
-  const handlerClick = useCallback(() => {
-    dispatch(setCurrentGameId(gameData.id));
-  }, [dispatch, gameData.id, setCurrentGameId]);
-
-  const platforms = gameData.parent_platforms.map((parent_platform: any) => {
-    const slug: string = parent_platform.platform.slug;
-    return (
-      <FontAwesomeIcon
-        title={`${slug}`}
-        key={`${gameData.id}_${slug}`}
-        icon={getPlatformType(slug)}
-        className="fontawesome__icon"
-      />
-    );
-  });
 
   return (
     <GameCardWrapper
       onMouseEnter={() => setHoverState(!hoverState)}
       onMouseLeave={() => setHoverState(!hoverState)}>
       <GameCardWrapperContent>
-        <GameCardMedia>
-          <GameCardImagePreview
-            style={{
-              backgroundImage: 'url(' + gameData.background_image + ')',
-            }}
-          />
-          <GameCardMediaSlider style={{ width: `${hoverState ? '100%' : '0px'}` }}>
-            <AwesomeSlider className="aws-btn" bullets={false}>
-              {sliders}
-            </AwesomeSlider>
-          </GameCardMediaSlider>
-        </GameCardMedia>
-
-        <GameCardInfo>
-          <GameCardInfoPlatformsAndRateContainer>
-            <GameCardInfoPlatforms>{platforms}</GameCardInfoPlatforms>
-            <GameCardInfoRate title={'Metascore'}>{gameData.metacritic}</GameCardInfoRate>
-          </GameCardInfoPlatformsAndRateContainer>
-          <Link to={`/games/${gameData.name}`} onClick={handlerClick}>
-            <GameCardInfoTitle>{gameData.name}</GameCardInfoTitle>
-          </Link>
-        </GameCardInfo>
-        <GameCardAdditionalInfo>
-          <GameCardGenres>
-            <span>Genres</span>
-            {genres}
-          </GameCardGenres>
-        </GameCardAdditionalInfo>
+        <GameCardMedia cardHoverState={hoverState} gameData={gameData} />
+        <GameCardMainInfo gameData={gameData} />
+        <GameCardAdditionalInfo gameData={gameData} />
       </GameCardWrapperContent>
     </GameCardWrapper>
   );

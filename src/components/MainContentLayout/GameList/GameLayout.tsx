@@ -9,19 +9,17 @@ import Header from '../Header/Header';
 const GameContainer = styled.div``;
 
 const GameLayout = () => {
-  const { currentGameId } = useAppSelector((state) => state.gameReducer);
-  const mapTest = new Map();
-  mapTest.set('a', 4);
-  mapTest.set(3, true);
-  console.log(mapTest);
-  mapTest.delete(3);
-  console.log(mapTest);
+  const { currentGameId, downloadGames } = useAppSelector((state) => state.gameReducer);
+
+  console.log(downloadGames[currentGameId], 'download');
   return (
     <>
       <Header />
-      <GameContainer>{`Game ${currentGameId}`} </GameContainer>
+      <GameContainer>
+        {`Game ${downloadGames[currentGameId] && downloadGames[currentGameId].name}`}{' '}
+      </GameContainer>
     </>
   );
 };
-
+/*  */
 export default GameLayout;

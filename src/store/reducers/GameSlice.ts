@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IGame } from 'models/IGame';
+import { IGame, IGamePrimary } from 'models/IGame';
 
 interface GameState {
   games: IGame[];
   isLoading: boolean;
   error: string;
-  downloadGames: IGame[];
+  downloadGames: { [key: number]: IGamePrimary };
   currentGameId: number;
 }
 
@@ -13,7 +13,7 @@ const initialState: GameState = {
   games: [],
   isLoading: false,
   error: '',
-  downloadGames: [],
+  downloadGames: {},
   currentGameId: 0,
 };
 
@@ -36,10 +36,10 @@ export const gameSlice = createSlice({
     gameFetching(state) {
       state.isLoading = true;
     },
-    gameFetchingSuccess(state, action: PayloadAction<IGame[]>) {
+    gameFetchingSuccess(state, action: PayloadAction<IGamePrimary>) {
       state.isLoading = false;
       state.error = '';
-      state.games = action.payload;
+      state.downloadGames[state.currentGameId] = action.payload;
     },
     setCurrentGameId(state, action: PayloadAction<number>) {
       state.currentGameId = action.payload;
