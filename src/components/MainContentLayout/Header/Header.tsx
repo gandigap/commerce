@@ -7,6 +7,8 @@ import LoginContent from './LoginContent/LoginContent';
 
 import styled from 'styled-components';
 import 'styles/mixinsAndVars.scss';
+import { useAuth } from 'hooks/auth-hook';
+import AuthContent from './LoginContent/AuthContent';
 
 const HeaderContainer = styled.header`
   margin: 20px;
@@ -15,12 +17,13 @@ const HeaderContainer = styled.header`
 `;
 
 const Header = () => {
+  const { isAuth } = useAuth();
   return (
     <HeaderContainer>
       <ThemeSwitcher />
       <Logo />
       <SearchInput />
-      <LoginContent />
+      {isAuth ? <AuthContent /> : <LoginContent />}
     </HeaderContainer>
   );
 };

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IGame } from 'models/IGame';
+import { IGame } from 'models/gameInterfaces';
 
 const getData = (type: string) => {
   let data: IGame[] = [];

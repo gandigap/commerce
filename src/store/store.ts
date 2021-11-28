@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import gameReducer from './reducers/GameSlice';
+import userReducer from './reducers/UserSlice';
 
 const rootReducer = combineReducers({
   gameReducer,
+  userReducer,
 });
 
 export const setupStore = () => {

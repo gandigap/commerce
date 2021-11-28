@@ -1,4 +1,4 @@
-import { IGameCardProps } from 'models/IGame';
+import { IGameCardProps } from 'models/gameInterfaces';
 import React from 'react';
 
 import styled from 'styled-components';
@@ -22,12 +22,14 @@ const GameCardAdditionalInfoContainerSubjectContent = styled.span`
   font-style: italic;
 `;
 
+const GameCardAdditionalInfoContainerSubjectContentWrapper = styled.span``;
+
 const GameCardAdditionalInfo: React.FC<IGameCardProps> = ({ gameData }) => {
   const genres = gameData.genres.map((genre: any) => {
     return (
-      <>
-        <span key={`${gameData.id}_${genre.name}`}>{genre.name}</span>,
-      </>
+      <GameCardAdditionalInfoContainerSubjectContentWrapper key={`${gameData.id}_${genre.name}`}>
+        <span>{genre.name}</span>,
+      </GameCardAdditionalInfoContainerSubjectContentWrapper>
     );
   });
 

@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
 import { gameSlice } from 'store/reducers/GameSlice';
-import { useAppDispatch } from 'hooks/redux';
+import { useAppDispatch } from 'hooks/redux-hooks';
 import { fetchGame } from 'store/reducers/ActionCreators';
 
 import { faMobile, faGamepad } from '@fortawesome/free-solid-svg-icons';
@@ -18,7 +18,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import styled from 'styled-components';
 import 'styles/mixinsAndVars.scss';
-import { IDataGameParentPlatforms, IGameCardProps } from 'models/IGame';
+import { IDataGameParentPlatforms, IGameCardProps } from 'models/gameInterfaces';
 
 const GameCardMainInfoContainer = styled.div`
   padding: 5px;

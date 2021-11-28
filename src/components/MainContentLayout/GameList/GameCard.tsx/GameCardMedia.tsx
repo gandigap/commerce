@@ -1,4 +1,4 @@
-import { IGame } from 'models/IGame';
+import { IGame } from 'models/gameInterfaces';
 import React from 'react';
 
 import AwesomeSlider from 'react-awesome-slider';

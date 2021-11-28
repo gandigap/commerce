@@ -1,4 +1,4 @@
-import { useAppSelector } from 'hooks/redux';
+import { useAppSelector } from 'hooks/redux-hooks';
 import React from 'react';
 
 import styled from 'styled-components';

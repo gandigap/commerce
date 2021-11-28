@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { IGameCardProps } from 'models/IGame';
+import { IGameCardProps } from 'models/gameInterfaces';
 
 import styled from 'styled-components';
 import 'react-awesome-slider/src/styles';
