@@ -12,12 +12,15 @@ export const ThemeSwitcherLabel = styled.label`
   display: inline-block;
   font-size: 20px;
   background-color: var(--color-4);
-  border-radius: 10px;  
+  border-radius: 10px;
+  cursor: pointer;
 `;
 
 export const ThemeSwitcherInput = styled.input`
   position: absolute;
   opacity: 0;
+  width: 0px;
+  height: 0px;
 
   &:checked + .switch__icon {
     -webkit-transform: translate3d(100%, 0, 0);
@@ -35,5 +38,5 @@ export const ThemeSwitcherIcon = styled.div`
   box-shadow: 0px 0px 3px 2px var(--color-5);
   -webkit-transition: all 300ms;
   -moz-transition: all 300ms;
-  transition: all 300ms;  
+  transition: all 300ms;
 `;

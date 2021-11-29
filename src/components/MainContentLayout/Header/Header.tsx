@@ -7,6 +7,7 @@ import LoginContent from './LoginContent/LoginContent';
 
 import styled from 'styled-components';
 import 'styles/mixinsAndVars.scss';
+
 import { useAuth } from 'hooks/auth-hook';
 import AuthContent from './LoginContent/AuthContent';
 

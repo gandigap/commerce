@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Login from './MainContentLayout/Header/LoginContent/Login';
+import Login from './MainContentLayout/Form/Login';
 
 const LoginPage = () => {
   return (

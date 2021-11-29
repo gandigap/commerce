@@ -7,11 +7,14 @@ import 'styles/mixinsAndVars.scss';
 
 const SearchInputContainer = styled.div`
   display: flex;
-  align-itens: center;
+  flex-grow: 1;
+  margin: 0 50px;
   background-color: var(--color-3);
 `;
 
 const Input = styled.input`
+  width: 100%;
+  border: none;
   padding: 0 12px 0 38px;
   background: url('${SearchIcon}') no-repeat scroll 16px;
   background-size: 14px;

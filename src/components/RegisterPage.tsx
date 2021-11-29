@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SignUp from './MainContentLayout/Header/LoginContent/SignUp';
+import SignUp from './MainContentLayout/Form/SignUp';
 
 const RegisterPage = () => {
   return (
