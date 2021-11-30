@@ -1,0 +1,37 @@
+@import './reset.css';
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;1,400;1,700&display=swap');
+
+:root {
+  --color-1: #ffffff;
+  --color-2: #f2f2f2;
+  --color-3: #cecece;
+  --color-4: #999999;
+  --color-5: #000000;
+  --color-info: #1c84ec;
+  --color-warning: #ffee44;
+  --color-success: #88cc88;
+  --color-danger: #ee6666;
+}
+
+[data-theme='dark'] {
+  --color-1: #000000;
+  --color-2: #222222;
+  --color-3: #373737;
+  --color-4: #4f4f50;
+  --color-5: #ffffff;
+  --color-info: #4499ee;
+  --color-warning: #ffff22;
+  --color-success: #66cc77;
+  --color-danger: #ff4444;
+}
+html,
+#root {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  background-color: var(--color-2);
+  color: var(--color-5);
+  font-family: 'Ubuntu', sans-serif;
+}
