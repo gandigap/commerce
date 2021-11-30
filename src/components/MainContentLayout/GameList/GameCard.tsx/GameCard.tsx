@@ -6,23 +6,26 @@ import styled from 'styled-components';
 import 'react-awesome-slider/src/styles';
 
 import GameCardMedia from './GameCardMedia';
-import GameCardMainInfo from './GameCardMainInfo';
+import GameCardInfo from './GameCardInfo';
 import GameCardAdditionalInfo from './GameCardAdditionalInfo';
 
 const GameCardWrapper = styled.div`
-  margin: 10px 0px;
-  overflow: hidden;
-  border: 1px solid var(--color-1);
-  border-radius: 20px;
-  background-color: var(--color-2);
-  -webkit-box-shadow: 0px 0px 5px 0px var(--color-4);
-  box-shadow: 0px 0px 5px 0px var(--color-4);
-
+  width: 40%;
+  margin: 10px;
   &:hover {
     transition: all 0.3s;
     transform: scale(1.02);
-    -webkit-box-shadow: 0px 0px 10px 0px var(--color-4);
-    box-shadow: 0px 0px 10px 0px var(--color-4);
+    position: relative;
+    z-index: 1;
+
+    .card-open {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      -webkit-box-shadow: 0px 0px 10px 0px var(--color-4);
+      box-shadow: 0px 0px 10px 0px var(--color-4);
+    }
   }
 
   .aws-btn {
@@ -42,6 +45,11 @@ const GameCardWrapper = styled.div`
 
 const GameCardWrapperContent = styled.div`
   overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid var(--color-1);
+  background-color: var(--color-2);
+  -webkit-box-shadow: 0px 0px 5px 0px var(--color-4);
+  box-shadow: 0px 0px 5px 0px var(--color-4);
 `;
 
 const GameCard: React.FC<IGameCardProps> = ({ gameData }) => {
@@ -51,10 +59,10 @@ const GameCard: React.FC<IGameCardProps> = ({ gameData }) => {
     <GameCardWrapper
       onMouseEnter={() => setHoverState(!hoverState)}
       onMouseLeave={() => setHoverState(!hoverState)}>
-      <GameCardWrapperContent>
+      <GameCardWrapperContent className={hoverState ? 'card-open' : ''}>
         <GameCardMedia cardHoverState={hoverState} gameData={gameData} />
-        <GameCardMainInfo gameData={gameData} />
-        <GameCardAdditionalInfo gameData={gameData} />
+        <GameCardInfo gameData={gameData} />
+        {hoverState ? <GameCardAdditionalInfo gameData={gameData} /> : null}
       </GameCardWrapperContent>
     </GameCardWrapper>
   );

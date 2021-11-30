@@ -13,7 +13,16 @@ const LogoContainer = styled.div`
   border-radius: 100%;
 
   &:hover {
-    background-color: var(--color-4);
+    animation: rotating 5s linear infinite;
+  }
+
+  @keyframes rotating {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 `;
 

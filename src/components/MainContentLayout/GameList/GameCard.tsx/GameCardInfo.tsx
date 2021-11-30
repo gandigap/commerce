@@ -20,8 +20,18 @@ import styled from 'styled-components';
 import 'styles/mixinsAndVars.scss';
 import { IDataGameParentPlatforms, IGameCardProps } from 'models/gameInterfaces';
 
-const GameCardMainInfoContainer = styled.div`
+const GameCardInfoContainer = styled.div`
   padding: 5px;
+
+  & a {
+    text-decoration: none;
+    color: var(--color-5);
+
+    &:hover {
+      color: var(--color-1);
+      text-shadow: 0px 0px 4px var(--color-5);
+    }
+  }
 `;
 
 const GameCardMainInfoContent = styled.div`
@@ -47,6 +57,7 @@ const GameCardRate = styled.div`
 
 const GameCardTitle = styled.h3`
   font-size: 24px;
+  height: 50px;
 `;
 
 const getPlatformType = (type: string) => {
@@ -72,7 +83,7 @@ const getPlatformType = (type: string) => {
   }
 };
 
-const GameCardMainInfo: React.FC<IGameCardProps> = ({ gameData }) => {
+const GameCardInfo: React.FC<IGameCardProps> = ({ gameData }) => {
   const { setCurrentGameId } = gameSlice.actions;
   const dispatch = useAppDispatch();
 
@@ -94,7 +105,7 @@ const GameCardMainInfo: React.FC<IGameCardProps> = ({ gameData }) => {
   });
 
   return (
-    <GameCardMainInfoContainer>
+    <GameCardInfoContainer>
       <GameCardMainInfoContent>
         <GameCardPlatforms>{platforms}</GameCardPlatforms>
         <GameCardRate title={'Metascore'}>{gameData.metacritic}</GameCardRate>
@@ -102,8 +113,8 @@ const GameCardMainInfo: React.FC<IGameCardProps> = ({ gameData }) => {
       <Link to={`/games/${gameData.name}`} onClick={handlerClick}>
         <GameCardTitle>{gameData.name}</GameCardTitle>
       </Link>
-    </GameCardMainInfoContainer>
+    </GameCardInfoContainer>
   );
 };
 
-export default GameCardMainInfo;
+export default GameCardInfo;

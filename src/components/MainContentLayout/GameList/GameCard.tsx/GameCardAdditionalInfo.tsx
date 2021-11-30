@@ -1,35 +1,47 @@
-import { IGameCardProps } from 'models/gameInterfaces';
 import React from 'react';
+
+import { Link } from 'react-router-dom';
+import { IGameCardProps } from 'models/gameInterfaces';
 
 import styled from 'styled-components';
 import 'styles/mixinsAndVars.scss';
 
 const GameCardAdditionalInfoContainer = styled.div`
-  padding: 5px;
+  background-color: var(--color-1);
+  flex-shrink: 1;
+  flex-grow: 1;
 `;
 
 const GameCardAdditionalInfoContainerSubject = styled.div`
   display: flex;
+  padding: 5px;
   justify-content: space-between;
   color: var(--color-4);
 `;
 
 const GameCardAdditionalInfoContainerSubjectTitle = styled.span`
+  margin: 0 10px;
   font-weight: bold;
 `;
 
 const GameCardAdditionalInfoContainerSubjectContent = styled.span`
   font-style: italic;
+  color: var(--color-5);
+  & a {
+    color: var(--color-5);
+    padding: 1px;
+    &:hover {
+      color: var(--color-info);
+    }
+  }
 `;
-
-const GameCardAdditionalInfoContainerSubjectContentWrapper = styled.span``;
 
 const GameCardAdditionalInfo: React.FC<IGameCardProps> = ({ gameData }) => {
   const genres = gameData.genres.map((genre: any) => {
     return (
-      <GameCardAdditionalInfoContainerSubjectContentWrapper key={`${gameData.id}_${genre.name}`}>
-        <span>{genre.name}</span>,
-      </GameCardAdditionalInfoContainerSubjectContentWrapper>
+      <Link key={`${gameData.id}_${genre.name}`} to={`games/${genre.slug}`}>
+        {genre.name},{' '}
+      </Link>
     );
   });
 

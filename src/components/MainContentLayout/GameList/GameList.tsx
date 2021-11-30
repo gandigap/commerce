@@ -9,8 +9,12 @@ import { IGame } from 'models/gameInterfaces';
 import GameCard from './GameCard.tsx/GameCard';
 
 const GameListContainer = styled.div`
-  display: grid;
-  grid-gap: 0 24px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+`;
+/* display: grid;
+  grid-gap: 20px;
   grid-template-columns: repeat(4, 1fr);
 
   @media (max-width: 1200px) {
@@ -23,9 +27,7 @@ const GameListContainer = styled.div`
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-  }
-`;
-
+  } */
 const GameList = () => {
   const { games, isLoading, error } = useAppSelector((state) => state.gameReducer);
   const dispatch = useAppDispatch();
