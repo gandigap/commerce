@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IGamePrimary, IGames } from 'models/gameInterfaces';
+import { IGamePrimary, IGames } from 'interfaces/gameInterfaces';
 import { AppDispatch } from 'store/store';
 import { gameSlice } from './GameSlice';
 
