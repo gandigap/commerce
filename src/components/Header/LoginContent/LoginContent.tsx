@@ -1,20 +1,19 @@
+import { _authPageTypes } from 'constants/constants';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
+import { headerAndFormLink, headerAndFormLinkHover } from 'styles/mixins';
 
 const AuthContainer = styled.div`
   display: flex;
   align-items: center;
 
   & a {
-    position: relative;
-    color: var(--color-5);
-    text-decoration: none;
-    margin: 0 10px;
+    ${headerAndFormLink}
 
     &:hover {
-      color: var(--color-4);
+      ${headerAndFormLinkHover}
 
       &:after {
         position: absolute;
@@ -34,8 +33,8 @@ const AuthContainer = styled.div`
 const LoginContent = () => {
   return (
     <AuthContainer>
-      <Link to="login">Login</Link>
-      <Link to="register">Sign up</Link>
+      <Link to="login">{_authPageTypes.log}</Link>
+      <Link to="register">{_authPageTypes.reg}</Link>
     </AuthContainer>
   );
 };

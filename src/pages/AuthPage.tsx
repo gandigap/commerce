@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import AuthForm from 'components/form/AuthForm';
+import Logo from 'components/Header/Logo/Logo';
 
 import styled from 'styled-components';
-import { pseudoSeparator } from 'styles/mixins';
+import { headerAndFormLink, headerAndFormLinkHover, pseudoSeparator } from 'styles/mixins';
 import { _authPageLinks, _authPageTypes } from 'constants/constants';
-import Logo from 'components/Header/Logo/Logo';
 
 const AuthContainer = styled.div`
   height: 100%;
@@ -15,6 +15,14 @@ const AuthContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  & a {
+    ${headerAndFormLink}
+
+    &:hover {
+      ${headerAndFormLinkHover}
+    }
+  }
 `;
 
 const AuthHeader = styled.header`
@@ -52,7 +60,7 @@ const AuthPage: React.FC<IAuthPage> = ({ type }) => {
       </AuthHeader>
       <AuthForm typeForm={type} />
       <Separator>or</Separator>
-      {type === _authPageTypes.login ? (
+      {type === _authPageTypes.log ? (
         <Link to="/register">{_authPageLinks.create}</Link>
       ) : (
         <Link to="/login">{_authPageLinks.login}</Link>

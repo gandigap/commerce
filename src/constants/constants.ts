@@ -4,11 +4,24 @@ export const _modalTypes = {
 };
 
 export const _authPageTypes = {
-  login: 'Log in',
-  register: 'New user',
+  log: 'Log in',
+  reg: 'Sign up',
+};
+
+export const _authPageTitles = {
+  log: 'Sign in',
+  reg: 'Register',
 };
 
 export const _authPageLinks = {
   create: 'CREATE AN ACCOUNT',
-  login: 'SIGN IN',
+  login: 'LOG IN',
 };
+
+export const _errorMessages = {
+  userWrong: 'User not found or wrong password.',
+  emailInUse: 'Email already in use.',
+  inputValueNotCorrect: 'Login or password are not correct.',
+};
+
+export const _listNavTitles = ['Home', 'Genres', 'Platforms', 'Creators', 'Tags'];

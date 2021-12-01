@@ -28,7 +28,7 @@ const Button = styled.button`
 
 const AuthContent = () => {
   const dispatch = useAppDispatch();
-  const { email } = useAppSelector((state) => state.userReducer);
+  const { user } = useAppSelector((state) => state.userReducer);
   const { removeUser } = userSlice.actions;
 
   const logoutHandleClick = useCallback(() => {
@@ -42,7 +42,7 @@ const AuthContent = () => {
   }, [value]);
   return (
     <>
-      <EmailInfo>{email}</EmailInfo>
+      <EmailInfo>{user.email}</EmailInfo>
       <Button onClick={logoutHandleClick}>
         <FontAwesomeIcon icon={faDoorClosed} />
       </Button>

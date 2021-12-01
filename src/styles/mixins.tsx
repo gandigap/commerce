@@ -33,3 +33,18 @@ export const buttonFormAndCard = () => {
   }
   `;
 };
+
+export const headerAndFormLink = () => {
+  return `
+    position: relative;
+    color: var(--color-5);
+    text-decoration: none;
+    margin: 0 10px;
+  `;
+};
+
+export const headerAndFormLinkHover = () => {
+  return `
+    color: var(--color-4);
+  `;
+};

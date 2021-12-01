@@ -1,3 +1,5 @@
+import { _errorMessages } from 'constants/constants';
+import { useAppSelector } from 'hooks/redux-hooks';
 import React, { useCallback, useState } from 'react';
 
 import styled from 'styled-components';
@@ -12,15 +14,24 @@ const FormInput = styled.input`
 `;
 
 const FormContainer = styled.div`
+  margin: 0 auto;
+  width: 300px;
   display: flex;
   flex-direction: column;
-  margin: 0 40px;
+  text-align: center;
 `;
 
 const FormButton = styled.button`
   margin: 0 auto;
   ${buttonFormAndCard}
   text-transform:uppercase;
+`;
+
+const FormError = styled.div`
+  margin: 5px;
+  height: 20px;
+  font-weight: bold;
+  color: var(--color-danger);
 `;
 
 interface IForm {
@@ -32,37 +43,41 @@ const Form: React.FC<IForm> = ({ title, handleClick }) => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const [errorAuth, setErrorAuth] = useState(false);
+  const { error } = useAppSelector((state) => state.userReducer);
 
   const handlerChangeEmail = useCallback((e) => {
     setEmail(e.target.value);
+    setErrorAuth(false);
   }, []);
   const handlerChangePass = useCallback((e) => {
     setPass(e.target.value);
+    setErrorAuth(false);
   }, []);
 
   const checkEmail = useCallback(() => {
-    if (email) {
-      email.match(/[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+/)
-        ? setErrorAuth(false)
-        : setErrorAuth(true);
-    }
+    return !!(email && email.match(/[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+/));
   }, [email]);
 
   const checkPassword = useCallback(() => {
-    if (pass) {
-      pass.match(/^[\da-zA-Z.\-_]+$/) ? setErrorAuth(false) : setErrorAuth(true);
-    }
+    return !!(pass && pass.match(/^[\da-zA-Z ]{6,10}$/));
   }, [pass]);
 
-  const buttonHandleClick = useCallback(() => {
-    handleClick(email, pass);
-  }, [email, handleClick, pass]);
+  const buttonAuthHandleClick = useCallback(() => {
+    if (checkEmail() && checkPassword()) {
+      setErrorAuth(false);
+      handleClick(email, pass);
+    } else {
+      setErrorAuth(true);
+    }
+  }, [checkEmail, checkPassword, email, handleClick, pass]);
 
   return (
     <FormContainer>
       <FormInput type="email" value={email} onChange={handlerChangeEmail} placeholder="email" />
       <FormInput type="password" value={pass} onChange={handlerChangePass} placeholder="password" />
-      <FormButton onClick={() => handleClick(email, pass)}>{title}</FormButton>
+      {errorAuth && <FormError>{_errorMessages.inputValueNotCorrect}</FormError>}
+      {error.length !== 0 && <FormError>{error}</FormError>}
+      <FormButton onClick={buttonAuthHandleClick}>{title}</FormButton>
     </FormContainer>
   );
 };
