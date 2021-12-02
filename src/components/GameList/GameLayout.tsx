@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppSelector } from 'hooks/redux-hooks';
 
-import Header from 'components/Header/Header';
+import Header from 'components/header/Header';
 
 import styled from 'styled-components';
 

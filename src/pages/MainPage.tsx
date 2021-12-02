@@ -1,9 +1,9 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-import Header from 'components/Header/Header';
+import Header from 'components/header/Header';
 import SectionTitle from 'components/SectionTitle/SectionTitle';
-import Sidebar from 'components/Sidebar/Navigation';
+import Sidebar from 'components/navigation/Navigation';
 
 import styled from 'styled-components';
 

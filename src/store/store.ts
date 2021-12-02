@@ -1,10 +1,14 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import gameReducer from './reducers/GameSlice';
 import userReducer from './reducers/UserSlice';
+import pageReducer from './reducers/PageSlice';
+import dataReducer from './reducers/DataSlice';
 
 const rootReducer = combineReducers({
   gameReducer,
   userReducer,
+  pageReducer,
+  dataReducer,
 });
 
 export const setupStore = () => {

@@ -38,8 +38,7 @@ export const headerAndFormLink = () => {
   return `
     position: relative;
     color: var(--color-5);
-    text-decoration: none;
-    margin: 0 10px;
+    text-decoration: none;   
   `;
 };
 

@@ -10,6 +10,7 @@ const AuthContainer = styled.div`
   align-items: center;
 
   & a {
+    margin: 0 10px;
     ${headerAndFormLink}
 
     &:hover {

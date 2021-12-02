@@ -2,9 +2,9 @@ import React, { useCallback, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import ContentLayout from 'pages/MainPage';
-import GameLayout from 'components/GameList/GameLayout';
-import GameList from 'components/GameList/GameList';
-import Other from 'components/GameList/Other';
+import GameLayout from 'components/gameList/GameLayout';
+import GameList from 'components/gameList/GameList';
+import Other from 'components/gameList/Other';
 import AuthPage from 'pages/AuthPage';
 import ModalContext from 'components/modal/ModalContext';
 import Modal from 'components/modal/Modal';

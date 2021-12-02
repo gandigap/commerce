@@ -31,6 +31,13 @@ export interface IGamePrimary {
   background_image: string;
 }
 
+export interface IGameAlternative {
+  id: number;
+  slug: string;
+  name: string;
+  added: number;
+}
+
 export interface IGameCardProps {
   gameData: IGame;
 }

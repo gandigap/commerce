@@ -24,4 +24,4 @@ export const _errorMessages = {
   inputValueNotCorrect: 'Login or password are not correct.',
 };
 
-export const _listNavTitles = ['Home', 'Genres', 'Platforms', 'Creators', 'Tags'];
+export const _listNavTitles = ['Genres', 'Platforms', 'Creators', 'Tags'];

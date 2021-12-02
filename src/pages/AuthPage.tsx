@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import AuthForm from 'components/form/AuthForm';
-import Logo from 'components/Header/Logo/Logo';
+import Logo from 'components/header/Logo/Logo';
 
 import styled from 'styled-components';
 import { headerAndFormLink, headerAndFormLinkHover, pseudoSeparator } from 'styles/mixins';
+
 import { _authPageLinks, _authPageTypes } from 'constants/constants';
 
 const AuthContainer = styled.div`

@@ -28,11 +28,11 @@ const GameCardAdditionalInfoContainerSubject = styled.div`
     position: absolute;
     content: '';
     height: 1px;
-    bottom: 60px;
+    bottom: 65px;
     margin: 0 auto;
     left: 0;
     right: 0;
-    width: 90%;
+    width: 80%;
     background-color: var(--color-3);
   }
 `;
