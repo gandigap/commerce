@@ -1,13 +1,14 @@
 import React, { useCallback, useContext } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks';
 import { userSlice } from 'store/reducers/UserSlice';
-import { _modalTypes } from 'constants/constants';
+import { _localeStorageItems, _modalTypes } from 'constants/constants';
 
 import styled from 'styled-components';
 
 import ModalContext from 'components/modal/ModalContext';
 import { faCogs, faDoorClosed } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { isTemplateSpan } from 'typescript';
 
 const EmailInfo = styled.p`
   font-style: italic;
@@ -26,6 +27,12 @@ const Button = styled.button`
   }
 `;
 
+const cleanLocaleStorage = () => {
+  _localeStorageItems.forEach((item) => {
+    localStorage.removeItem(item);
+  });
+};
+
 const AuthContent = () => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.userReducer);
@@ -33,6 +40,7 @@ const AuthContent = () => {
 
   const logoutHandleClick = useCallback(() => {
     dispatch(removeUser());
+    cleanLocaleStorage();
   }, [dispatch, removeUser]);
 
   const value = useContext(ModalContext);

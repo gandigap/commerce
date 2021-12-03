@@ -112,7 +112,7 @@ const GameCardInfo: React.FC<IGameCardProps> = ({ gameData }) => {
           <GameCardRate title={'Metascore'}>{gameData.metacritic}</GameCardRate>
         )}
       </GameCardMainInfoContent>
-      <Link to={`/games/${gameData.name}`} onClick={handlerClick}>
+      <Link to={`/games/${gameData.id}`} onClick={handlerClick}>
         <GameCardTitle>{gameData.name}</GameCardTitle>
       </Link>
     </GameCardInfoContainer>

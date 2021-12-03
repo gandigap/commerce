@@ -23,6 +23,7 @@ const AuthForm: React.FC<IAuthForm> = ({ typeForm }) => {
         dispatch(
           userFetchingSuccess({ email: user.email, token: user.refreshToken, id: user.uid }),
         );
+        user.email && localStorage.setItem('email', user.email);
         navigate('/');
       })
       .catch((error) => {
@@ -37,6 +38,7 @@ const AuthForm: React.FC<IAuthForm> = ({ typeForm }) => {
         dispatch(
           userFetchingSuccess({ email: user.email, token: user.refreshToken, id: user.uid }),
         );
+        user.email && localStorage.setItem('email', user.email);
         navigate('/');
       })
       .catch((error) => {

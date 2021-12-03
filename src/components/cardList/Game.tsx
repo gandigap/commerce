@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks';
 import styled from 'styled-components';
 import { gameSlice } from 'store/reducers/GameSlice';
 import { fetchGame } from 'store/reducers/ActionCreators';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
 const GameContainer = styled.div`
   margin: 0 40px;
@@ -21,19 +22,31 @@ const Game = () => {
   const { currentGameId, downloadGames } = useAppSelector((state) => state.gameReducer);
   const { setCurrentGameId } = gameSlice.actions;
   const dispatch = useAppDispatch();
+  const { id } = useParams();
 
-  /* useEffect(() => {
-    dispatch(setCurrentGameId(5));
-    dispatch(fetchGame(5));
-  }, [dispatch, fetchGame, setCurrentGameId]); */
+  useEffect(() => {
+    if (!downloadGames[currentGameId]) {
+      console.log('qwrqwe');
+      if (id) {
+        dispatch(setCurrentGameId(parseInt(id)));
+        dispatch(fetchGame(parseInt(id)));
+      }
+    }
+  }, [currentGameId, dispatch, downloadGames, setCurrentGameId]);
 
   return (
     <GameContainer>
-      <GameTitle>{downloadGames[currentGameId] && downloadGames[currentGameId].name}</GameTitle>
-      <GameDescription>
-        {downloadGames[currentGameId] && downloadGames[currentGameId].description_raw}
-      </GameDescription>
-      {`Game ${downloadGames[currentGameId] && downloadGames[currentGameId].name}`}{' '}
+      {downloadGames[currentGameId] ? (
+        <>
+          <GameTitle>{downloadGames[currentGameId] && downloadGames[currentGameId].name}</GameTitle>
+          <GameDescription>
+            {downloadGames[currentGameId] && downloadGames[currentGameId].description_raw}
+          </GameDescription>
+          {`Game ${downloadGames[currentGameId] && downloadGames[currentGameId].name}`}{' '}
+        </>
+      ) : (
+        <p>Game not found</p>
+      )}
     </GameContainer>
   );
 };

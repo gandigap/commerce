@@ -25,3 +25,5 @@ export const _errorMessages = {
 };
 
 export const _listNavTitles = ['Genres', 'Platforms', 'Creators', 'Tags'];
+
+export const _localeStorageItems = ['email', 'refreshToken', 'uid'];
