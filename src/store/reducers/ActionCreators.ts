@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { ITotalData } from 'interfaces/dataInterfaces';
-import { IGamePrimary, IGames } from 'interfaces/gameInterfaces';
+import { IFetchData } from 'interfaces/dataInterfaces';
+import { IFetchGames, IGamePrimary } from 'interfaces/gameInterfaces';
 import { AppDispatch } from 'store/store';
 import { dataSlice } from './DataSlice';
 import { gameSlice } from './GameSlice';
@@ -8,7 +8,7 @@ import { gameSlice } from './GameSlice';
 export const fetchGames = () => async (dispatch: AppDispatch) => {
   try {
     dispatch(gameSlice.actions.gamesFetching());
-    const response = await axios.get<IGames>(`https://api.rawg.io/api/games?`, {
+    const response = await axios.get<IFetchGames>(`https://api.rawg.io/api/games?`, {
       params: {
         key: 'dc31c2a55aa444959f74eb7bc96b0617',
         page: 1,
@@ -27,7 +27,7 @@ export const fetchDataByCategory =
   async (dispatch: AppDispatch) => {
     try {
       dispatch(dataSlice.actions.dataFetching());
-      const response = await axios.get<ITotalData>(`https://api.rawg.io/api/${category}?`, {
+      const response = await axios.get<IFetchData>(`https://api.rawg.io/api/${category}?`, {
         params: {
           key: 'dc31c2a55aa444959f74eb7bc96b0617',
           page: pageNumber,

@@ -7,7 +7,7 @@ import { fetchGames } from 'store/reducers/ActionCreators';
 import { IGame } from 'interfaces/gameInterfaces';
 import GameCard from './GameCard.tsx/GameCard';
 
-const GameListContainer = styled.div`
+const CardListContainer = styled.div`
   display: grid;
   grid-gap: 20px;
   grid-template-columns: repeat(4, 1fr);
@@ -25,7 +25,7 @@ const GameListContainer = styled.div`
   }
 `;
 
-const GameList = () => {
+const CardList = () => {
   const { games, isLoading, error } = useAppSelector((state) => state.gameReducer);
   const dispatch = useAppDispatch();
 
@@ -34,14 +34,14 @@ const GameList = () => {
   }, [dispatch, games.length]);
 
   return (
-    <GameListContainer>
+    <CardListContainer>
       {isLoading && <h3>Идет загрузка</h3>}
       {error && <h3>{error}</h3>}
       {games.map((game: IGame) => (
         <GameCard key={game.id} gameData={game} />
       ))}
-    </GameListContainer>
+    </CardListContainer>
   );
 };
 
-export default GameList;
+export default CardList;

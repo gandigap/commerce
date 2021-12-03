@@ -2,9 +2,9 @@ import React, { useCallback, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import ContentLayout from 'pages/MainPage';
-import GameLayout from 'components/gameList/GameLayout';
-import GameList from 'components/gameList/GameList';
-import Other from 'components/gameList/Other';
+import GamePage from 'pages/GamePage';
+import CardList from 'components/cardList/CardList';
+import Other from 'components/cardList/Other';
 import AuthPage from 'pages/AuthPage';
 import ModalContext from 'components/modal/ModalContext';
 import Modal from 'components/modal/Modal';
@@ -48,15 +48,15 @@ function App() {
       </Modal>
       <Routes>
         <Route path="/" element={<ContentLayout />}>
-          <Route index element={<GameList />} />
+          <Route index element={<CardList />} />
           <Route path="stores" element={<Other />} />
           {_listNavTitles.map((path, index) => (
-            <Route path={path.toLowerCase()} element={<GameList />} key={`${path}_path`} />
+            <Route path={path.toLowerCase()} element={<CardList />} key={`${path}_path`} />
           ))}
         </Route>
         <Route path="login" element={<AuthPage type={_authPageTypes.log} />} />
         <Route path="register" element={<AuthPage type={_authPageTypes.reg} />} />
-        <Route path="games/:id" element={<GameLayout />} />
+        <Route path="games/:id" element={<GamePage />} />
         <Route path="*" element={<p>Not found page</p>} />
       </Routes>
     </ModalContext.Provider>

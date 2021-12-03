@@ -1,13 +1,12 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
-import { IGameCardProps } from 'interfaces/gameInterfaces';
-
 import { faGift } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import styled from 'styled-components';
 import { buttonFormAndCard } from 'styles/mixins';
+import { IGameCardProps } from 'interfaces/gameInterfaces';
 
 const GameCardAdditionalInfoContainer = styled.div`
   display: flex;

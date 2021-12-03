@@ -1,3 +1,8 @@
+import { IDataGeneral } from './dataInterfaces';
+
+export interface IGameCardProps {
+  gameData: IGame;
+}
 export interface IGame {
   added: number;
   background_image: string;
@@ -20,7 +25,7 @@ export interface IDataGameParentPlatforms {
   platform: { id: number; name: string; slug: string };
 }
 
-export interface IGames {
+export interface IFetchGames {
   results: IGame[];
 }
 
@@ -28,16 +33,13 @@ export interface IGamePrimary {
   id: number;
   name: string;
   released: string;
+  description_raw: string;
   background_image: string;
-}
-
-export interface IGameAlternative {
-  id: number;
-  slug: string;
-  name: string;
+  website: string;
+  rating: { id: number; title: string; count: number; percent: number }[];
   added: number;
-}
-
-export interface IGameCardProps {
-  gameData: IGame;
+  stores: { id: number; name: string; domain: string; games_count: string }[];
+  developers: IDataGeneral[];
+  tags: IDataGeneral[];
+  publishers: IDataGeneral[];
 }

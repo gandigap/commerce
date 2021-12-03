@@ -1,5 +1,3 @@
-import { IGameAlternative } from './gameInterfaces';
-
 export interface IData {
   id: number;
   name: string;
@@ -7,9 +5,16 @@ export interface IData {
   image?: string | null;
   background_image: string;
   games_count: number;
-  games: IGameAlternative[];
+  games: IDataGeneral[];
+}
+export interface IDataGeneral {
+  id: number;
+  name: string;
+  slug: string;
+  games_count: string;
+  image_background: string;
 }
 
-export interface ITotalData {
+export interface IFetchData {
   results: IData[];
 }
