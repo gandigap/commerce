@@ -23,7 +23,7 @@ const Header = () => {
       <ThemeSwitcher />
       <Logo />
       <SearchInput />
-      {isAuth ? <AuthContent /> : <LoginContent />}
+      {localStorage.getItem('email') ? <AuthContent /> : <LoginContent />}
     </HeaderContainer>
   );
 };

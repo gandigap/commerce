@@ -49,9 +49,11 @@ const Separator = styled.p`
     right: 20px;
   }
 `;
+
 interface IAuthPage {
   type: string;
 }
+
 const AuthPage: React.FC<IAuthPage> = ({ type }) => {
   return (
     <AuthContainer>

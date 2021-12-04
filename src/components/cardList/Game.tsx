@@ -42,7 +42,7 @@ const Game = () => {
           <GameDescription>
             {downloadGames[currentGameId] && downloadGames[currentGameId].description_raw}
           </GameDescription>
-          {`Game ${downloadGames[currentGameId] && downloadGames[currentGameId].name}`}{' '}
+          {`Game ${downloadGames[currentGameId] && downloadGames[currentGameId].name}`}
         </>
       ) : (
         <p>Game not found</p>

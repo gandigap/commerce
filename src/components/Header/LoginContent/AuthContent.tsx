@@ -27,7 +27,7 @@ const Button = styled.button`
   }
 `;
 
-const cleanLocaleStorage = () => {
+const clearLocaleStorage = () => {
   _localeStorageItems.forEach((item) => {
     localStorage.removeItem(item);
   });
@@ -40,7 +40,7 @@ const AuthContent = () => {
 
   const logoutHandleClick = useCallback(() => {
     dispatch(removeUser());
-    cleanLocaleStorage();
+    clearLocaleStorage();
   }, [dispatch, removeUser]);
 
   const value = useContext(ModalContext);

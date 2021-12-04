@@ -5,7 +5,18 @@ import { useAppDispatch } from 'hooks/redux-hooks';
 import { userSlice } from 'store/reducers/UserSlice';
 
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-import { _authPageTitles, _authPageTypes, _errorMessages } from 'constants/constants';
+import {
+  _authPageTitles,
+  _authPageTypes,
+  _errorMessages,
+  _localeStorageItems,
+} from 'constants/constants';
+
+const setLocaleStorage = ({ ...params }) => {
+  params.forEach((item: string, index: number) => {
+    localStorage.setItem(_localeStorageItems[index], item);
+  });
+};
 
 interface IAuthForm {
   typeForm: string;
@@ -23,7 +34,7 @@ const AuthForm: React.FC<IAuthForm> = ({ typeForm }) => {
         dispatch(
           userFetchingSuccess({ email: user.email, token: user.refreshToken, id: user.uid }),
         );
-        user.email && localStorage.setItem('email', user.email);
+        setLocaleStorage([user.email, user.refreshToken, user.uid]);
         navigate('/');
       })
       .catch((error) => {
@@ -38,7 +49,7 @@ const AuthForm: React.FC<IAuthForm> = ({ typeForm }) => {
         dispatch(
           userFetchingSuccess({ email: user.email, token: user.refreshToken, id: user.uid }),
         );
-        user.email && localStorage.setItem('email', user.email);
+        setLocaleStorage([user.email, user.refreshToken, user.uid]);
         navigate('/');
       })
       .catch((error) => {
