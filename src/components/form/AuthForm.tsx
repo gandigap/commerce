@@ -1,21 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+
 import Form from './Form';
 import { useAppDispatch } from 'hooks/redux-hooks';
 import { userSlice } from 'store/reducers/UserSlice';
 
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-import {
-  _authPageTitles,
-  _authPageTypes,
-  _errorMessages,
-  _localeStorageItems,
-} from 'constants/constants';
+import { _authPageTitles, _authPageTypes, _errorMessages } from 'constants/constants';
 
-const setLocaleStorage = ({ ...params }) => {
-  params.forEach((item: string, index: number) => {
-    localStorage.setItem(_localeStorageItems[index], item);
-  });
+const setLocaleStorage = (userInfo: any) => {
+  localStorage.setItem('user', JSON.stringify(userInfo));
 };
 
 interface IAuthForm {
@@ -31,10 +25,9 @@ const AuthForm: React.FC<IAuthForm> = ({ typeForm }) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        dispatch(
-          userFetchingSuccess({ email: user.email, token: user.refreshToken, id: user.uid }),
-        );
-        setLocaleStorage([user.email, user.refreshToken, user.uid]);
+        const data = { email: user.email, token: user.refreshToken, id: user.uid };
+        dispatch(userFetchingSuccess(data));
+        setLocaleStorage(data);
         navigate('/');
       })
       .catch((error) => {
@@ -46,10 +39,9 @@ const AuthForm: React.FC<IAuthForm> = ({ typeForm }) => {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        dispatch(
-          userFetchingSuccess({ email: user.email, token: user.refreshToken, id: user.uid }),
-        );
-        setLocaleStorage([user.email, user.refreshToken, user.uid]);
+        const data = { email: user.email, token: user.refreshToken, id: user.uid };
+        dispatch(userFetchingSuccess(data));
+        setLocaleStorage(data);
         navigate('/');
       })
       .catch((error) => {

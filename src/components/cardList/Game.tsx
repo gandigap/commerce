@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks';
 import styled from 'styled-components';
 import { gameSlice } from 'store/reducers/GameSlice';
 import { fetchGame } from 'store/reducers/ActionCreators';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const GameContainer = styled.div`
   margin: 0 40px;
@@ -26,13 +26,12 @@ const Game = () => {
 
   useEffect(() => {
     if (!downloadGames[currentGameId]) {
-      console.log('qwrqwe');
       if (id) {
         dispatch(setCurrentGameId(parseInt(id)));
         dispatch(fetchGame(parseInt(id)));
       }
     }
-  }, [currentGameId, dispatch, downloadGames, setCurrentGameId]);
+  }, [currentGameId, dispatch, downloadGames, id, setCurrentGameId]);
 
   return (
     <GameContainer>

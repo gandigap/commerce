@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
 import AuthForm from 'components/form/AuthForm';
@@ -8,6 +8,8 @@ import styled from 'styled-components';
 import { headerAndFormLink, headerAndFormLinkHover, pseudoSeparator } from 'styles/mixins';
 
 import { _authPageLinks, _authPageTypes } from 'constants/constants';
+import { useAppDispatch } from 'hooks/redux-hooks';
+import { userSlice } from 'store/reducers/UserSlice';
 
 const AuthContainer = styled.div`
   height: 100%;
@@ -55,6 +57,13 @@ interface IAuthPage {
 }
 
 const AuthPage: React.FC<IAuthPage> = ({ type }) => {
+  const dispatch = useAppDispatch();
+  const { userFetchingError } = userSlice.actions;
+
+  const clearError = useCallback(() => {
+    dispatch(userFetchingError(''));
+  }, [dispatch, userFetchingError]);
+
   return (
     <AuthContainer>
       <AuthHeader>
@@ -64,9 +73,13 @@ const AuthPage: React.FC<IAuthPage> = ({ type }) => {
       <AuthForm typeForm={type} />
       <Separator>or</Separator>
       {type === _authPageTypes.log ? (
-        <Link to="/register">{_authPageLinks.create}</Link>
+        <Link to="/register" onClick={clearError}>
+          {_authPageLinks.create}
+        </Link>
       ) : (
-        <Link to="/login">{_authPageLinks.login}</Link>
+        <Link to="/login" onClick={clearError}>
+          {_authPageLinks.login}
+        </Link>
       )}
     </AuthContainer>
   );

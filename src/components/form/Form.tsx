@@ -1,6 +1,9 @@
-import { _errorMessages } from 'constants/constants';
-import { useAppSelector } from 'hooks/redux-hooks';
 import React, { useCallback, useState } from 'react';
+
+import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks';
+import { userSlice } from 'store/reducers/UserSlice';
+
+import { _errorMessages } from 'constants/constants';
 
 import styled from 'styled-components';
 import { buttonFormAndCard } from 'styles/mixins';
@@ -42,16 +45,17 @@ interface IForm {
 const Form: React.FC<IForm> = ({ title, handleClick }) => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
-  const [errorAuth, setErrorAuth] = useState(false);
+
+  const dispatch = useAppDispatch();
+  const { userFetchingError } = userSlice.actions;
   const { error } = useAppSelector((state) => state.userReducer);
 
-  const handlerChangeEmail = useCallback((e) => {
+  const changeEmail = useCallback((e) => {
     setEmail(e.target.value);
-    setErrorAuth(false);
   }, []);
-  const handlerChangePass = useCallback((e) => {
+
+  const changePass = useCallback((e) => {
     setPass(e.target.value);
-    setErrorAuth(false);
   }, []);
 
   const checkEmail = useCallback(() => {
@@ -62,20 +66,35 @@ const Form: React.FC<IForm> = ({ title, handleClick }) => {
     return !!(pass && pass.match(/^[\da-zA-Z ]{6,10}$/));
   }, [pass]);
 
+  const clearError = useCallback(() => {
+    dispatch(userFetchingError(''));
+  }, [dispatch, userFetchingError]);
+
   const buttonAuthHandleClick = useCallback(() => {
     if (checkEmail() && checkPassword()) {
-      setErrorAuth(false);
+      dispatch(userFetchingError(''));
       handleClick(email, pass);
     } else {
-      setErrorAuth(true);
+      dispatch(userFetchingError(_errorMessages.inputValueNotCorrect));
     }
-  }, [checkEmail, checkPassword, email, handleClick, pass]);
+  }, [checkEmail, checkPassword, dispatch, email, handleClick, pass, userFetchingError]);
 
   return (
     <FormContainer>
-      <FormInput type="email" value={email} onChange={handlerChangeEmail} placeholder="email" />
-      <FormInput type="password" value={pass} onChange={handlerChangePass} placeholder="password" />
-      {errorAuth && <FormError>{_errorMessages.inputValueNotCorrect}</FormError>}
+      <FormInput
+        type="email"
+        value={email}
+        onChange={changeEmail}
+        placeholder="email"
+        onFocus={clearError}
+      />
+      <FormInput
+        type="password"
+        value={pass}
+        onChange={changePass}
+        placeholder="password"
+        onFocus={clearError}
+      />
       {error.length !== 0 && <FormError>{error}</FormError>}
       <FormButton onClick={buttonAuthHandleClick}>{title}</FormButton>
     </FormContainer>

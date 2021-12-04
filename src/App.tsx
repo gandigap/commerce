@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import ContentLayout from 'pages/MainPage';
@@ -12,6 +12,8 @@ import ModalOverlay from 'components/modal/ModalOverlay';
 import { _authPageTypes, _listNavTitles, _modalTypes } from 'constants/constants';
 
 import './styles/_global.scss';
+import { useAppDispatch } from 'hooks/redux-hooks';
+import { userSlice } from 'store/reducers/UserSlice';
 
 function App() {
   const [isModalOpen, setShowModal] = useState(false);
@@ -22,6 +24,8 @@ function App() {
     typeModal,
     setTypeModal,
   };
+  const dispatch = useAppDispatch();
+  const { userFetchingSuccess } = userSlice.actions;
 
   const changeStateModal = useCallback(
     (e) => {
@@ -29,6 +33,11 @@ function App() {
     },
     [isModalOpen],
   );
+
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    user && dispatch(userFetchingSuccess(JSON.parse(user)));
+  }, [dispatch, userFetchingSuccess]);
 
   const changeContentModal = useCallback(() => {
     switch (valueModalContext.typeModal) {
