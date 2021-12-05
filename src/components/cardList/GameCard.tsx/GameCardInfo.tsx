@@ -24,7 +24,6 @@ const GameCardInfoContainer = styled.div`
   padding: 5px;
 
   & a {
-    text-decoration: none;
     color: var(--color-5);
 
     &:hover {

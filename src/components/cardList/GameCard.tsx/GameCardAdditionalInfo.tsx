@@ -52,7 +52,6 @@ const GameCardAdditionalInfoContainerSubjectContent = styled.div`
   & a {
     padding: 1px;
     color: var(--color-5);
-    text-decoration: none;
     &:hover {
       color: var(--color-info);
     }

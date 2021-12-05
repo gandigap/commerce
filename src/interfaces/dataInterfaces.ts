@@ -13,6 +13,7 @@ export interface IDataGeneral {
   slug: string;
   games_count: string;
   image_background: string;
+  domain?: string;
 }
 
 export interface IFetchData {

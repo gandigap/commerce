@@ -38,7 +38,7 @@ export interface IGamePrimary {
   website: string;
   rating: { id: number; title: string; count: number; percent: number }[];
   added: number;
-  stores: { id: number; name: string; domain: string; games_count: string }[];
+  stores: { id: number; store: IDataGeneral }[];
   developers: IDataGeneral[];
   tags: IDataGeneral[];
   publishers: IDataGeneral[];

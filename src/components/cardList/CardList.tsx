@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks';
 import { fetchGames } from 'store/reducers/ActionCreators';
 import { IGame } from 'interfaces/gameInterfaces';
 import GameCard from './GameCard.tsx/GameCard';
+import SectionTitle from 'components/SectionTitle/SectionTitle';
 
 const CardListContainer = styled.div`
   display: grid;
@@ -34,13 +35,16 @@ const CardList = () => {
   }, [dispatch, games.length]);
 
   return (
-    <CardListContainer>
-      {isLoading && <h3>Идет загрузка</h3>}
-      {error && <h3>{error}</h3>}
-      {games.map((game: IGame) => (
-        <GameCard key={game.id} gameData={game} />
-      ))}
-    </CardListContainer>
+    <>
+      <SectionTitle />
+      <CardListContainer>
+        {isLoading && <h3>Идет загрузка</h3>}
+        {error && <h3>{error}</h3>}
+        {games.map((game: IGame) => (
+          <GameCard key={game.id} gameData={game} />
+        ))}
+      </CardListContainer>
+    </>
   );
 };
 

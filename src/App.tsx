@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import ContentLayout from 'pages/MainPage';
-import GamePage from 'pages/GamePage';
 import CardList from 'components/cardList/CardList';
+import Game from 'components/cardList/game/Game';
 import Other from 'components/cardList/Other';
 import AuthPage from 'pages/AuthPage';
 import ModalContext from 'components/modal/ModalContext';
@@ -58,6 +58,7 @@ function App() {
       <Routes>
         <Route path="/" element={<ContentLayout />}>
           <Route index element={<CardList />} />
+          <Route path="games/:id" element={<Game />} />
           <Route path="stores" element={<Other />} />
           {_listNavTitles.map((path, index) => (
             <Route path={path.toLowerCase()} element={<CardList />} key={`${path}_path`} />
@@ -65,7 +66,7 @@ function App() {
         </Route>
         <Route path="login" element={<AuthPage type={_authPageTypes.log} />} />
         <Route path="register" element={<AuthPage type={_authPageTypes.reg} />} />
-        <Route path="games/:id" element={<GamePage />} />
+
         <Route path="*" element={<p>Not found page</p>} />
       </Routes>
     </ModalContext.Provider>
