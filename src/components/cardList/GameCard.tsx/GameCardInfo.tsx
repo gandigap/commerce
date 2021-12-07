@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
-import { gameSlice } from 'store/reducers/GameSlice';
 import { useAppDispatch } from 'hooks/redux-hooks';
 import { fetchGame } from 'store/reducers/ActionCreators';
 
@@ -83,13 +82,11 @@ const getPlatformType = (type: string) => {
 };
 
 const GameCardInfo: React.FC<IGameCardProps> = ({ gameData }) => {
-  const { setCurrentGameId } = gameSlice.actions;
   const dispatch = useAppDispatch();
 
   const handlerClick = useCallback(() => {
-    dispatch(setCurrentGameId(gameData.id));
-    dispatch(fetchGame(gameData.id));
-  }, [dispatch, gameData.id, setCurrentGameId]);
+    dispatch(fetchGame(gameData.slug));
+  }, [dispatch, gameData.slug]);
 
   const platforms = gameData.parent_platforms.map((parent_platform: IDataGameParentPlatforms) => {
     const slug: string = parent_platform.platform.slug;
@@ -111,7 +108,7 @@ const GameCardInfo: React.FC<IGameCardProps> = ({ gameData }) => {
           <GameCardRate title={'Metascore'}>{gameData.metacritic}</GameCardRate>
         )}
       </GameCardMainInfoContent>
-      <Link to={`/games/${gameData.id}`} onClick={handlerClick}>
+      <Link to={`/games/${gameData.slug}`} onClick={handlerClick}>
         <GameCardTitle>{gameData.name}</GameCardTitle>
       </Link>
     </GameCardInfoContainer>

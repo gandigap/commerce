@@ -58,7 +58,7 @@ function App() {
       <Routes>
         <Route path="/" element={<ContentLayout />}>
           <Route index element={<CardList />} />
-          <Route path="games/:id" element={<Game />} />
+          <Route path="games/:slug" element={<Game />} />
           <Route path="stores" element={<Other />} />
           {_listNavTitles.map((path, index) => (
             <Route path={path.toLowerCase()} element={<CardList />} key={`${path}_path`} />

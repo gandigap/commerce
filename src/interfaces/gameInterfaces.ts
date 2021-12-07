@@ -4,11 +4,12 @@ export interface IGameCardProps {
   gameData: IGame;
 }
 export interface IGame {
+  id: number;
+  name: string;
+  slug: string;
   added: number;
   background_image: string;
   genres: [{ [key: string]: number }];
-  id: number;
-  name: string;
   metacritic: number;
   parent_platforms: IDataGameParentPlatforms[];
   rating: number;

@@ -15,7 +15,6 @@ export const fetchGames = () => async (dispatch: AppDispatch) => {
         page_size: 30,
       },
     });
-    console.log(response.data, 'data');
     dispatch(gameSlice.actions.gamesFetchingSuccess(response.data.results));
   } catch (e: any) {
     dispatch(gameSlice.actions.gamesFetchingError(e.message));
@@ -34,23 +33,22 @@ export const fetchDataByCategory =
           page_size: pageSizeNumber,
         },
       });
-      console.log(response.data, 'data');
       dispatch(dataSlice.actions.dataFetchingSuccess(response.data.results));
     } catch (e: any) {
       dispatch(dataSlice.actions.dataFetchingError(e.message));
     }
   };
 
-export const fetchGame = (id: number) => async (dispatch: AppDispatch) => {
+export const fetchGame = (slug: string) => async (dispatch: AppDispatch) => {
   try {
     dispatch(gameSlice.actions.gamesFetching());
-    const response = await axios.get<IGamePrimary>(`https://api.rawg.io/api/games/${id}?`, {
+    const response = await axios.get<IGamePrimary>(`https://api.rawg.io/api/games/${slug}?`, {
       params: {
         key: 'dc31c2a55aa444959f74eb7bc96b0617',
       },
     });
-    console.log(response.data, 'data');
     dispatch(gameSlice.actions.gameFetchingSuccess(response.data));
+    dispatch(gameSlice.actions.setCurrentGameId(response.data.id));
   } catch (e: any) {
     dispatch(gameSlice.actions.gamesFetchingError(e.message));
   }

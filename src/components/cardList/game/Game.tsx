@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks';
 import { useParams } from 'react-router-dom';
 
-import { gameSlice } from 'store/reducers/GameSlice';
 import { fetchGame } from 'store/reducers/ActionCreators';
 
 import styled from 'styled-components';
@@ -35,20 +34,26 @@ const GameDescription = styled.div`
   font-size: 18px;
 `;
 
+const GameImageContainer = styled.figure`
+  margin: 10px;
+  box-shadow: 0px 0px 10px 5px var(--color-5);
+`;
+const GameImage = styled.img`
+  width: 100%;
+`;
+
 const Game = () => {
   const { currentGameId, downloadGames } = useAppSelector((state) => state.gameReducer);
-  const { setCurrentGameId } = gameSlice.actions;
   const dispatch = useAppDispatch();
-  const { id } = useParams();
+  const { slug } = useParams();
 
   useEffect(() => {
     if (!downloadGames[currentGameId]) {
-      if (id) {
-        dispatch(setCurrentGameId(parseInt(id)));
-        dispatch(fetchGame(parseInt(id)));
+      if (slug) {
+        dispatch(fetchGame(slug));
       }
     }
-  }, [currentGameId, dispatch, downloadGames, id, setCurrentGameId]);
+  }, [currentGameId, dispatch, downloadGames, slug]);
 
   return (
     <>
@@ -57,6 +62,9 @@ const Game = () => {
           <GameTitle>{downloadGames[currentGameId].name}</GameTitle>
           <GameContainer>
             <GameMainInfo>
+              <GameImageContainer>
+                <GameImage src={downloadGames[currentGameId].background_image}></GameImage>
+              </GameImageContainer>
               <GameDescription>{downloadGames[currentGameId].description_raw}</GameDescription>
             </GameMainInfo>
             <GameAdditionalInfo>

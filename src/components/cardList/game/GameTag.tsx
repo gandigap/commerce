@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const GameTagContainer = styled.div`
-  height: 20px;
-  & a {
+  & {
     padding: 3px;
     border-radius: 10px;
     background-color: var(--color-4);
@@ -25,9 +24,9 @@ type Props = {
 
 const GameTag: React.FC<Props> = ({ tagInfo }) => {
   return (
-    <GameTagContainer>
-      <Link to={`/tag/${tagInfo.id}`}>{tagInfo.name.toLowerCase()}</Link>
-    </GameTagContainer>
+    <Link to={`/tag/${tagInfo.id}`}>
+      <GameTagContainer>{tagInfo.name.toLowerCase()}</GameTagContainer>
+    </Link>
   );
 };
 
