@@ -3,16 +3,16 @@ import { IGame, IGamePrimary } from 'interfaces/gameInterfaces';
 
 interface GameState {
   games: IGame[];
-  isLoading: boolean;
-  error: string;
+  isLoadingGames: boolean;
+  errorFetchGames: string;
   downloadGames: { [key: number]: IGamePrimary };
   currentGameId: number;
 }
 
 const initialState: GameState = {
   games: [],
-  isLoading: false,
-  error: '',
+  isLoadingGames: false,
+  errorFetchGames: '',
   downloadGames: {},
   currentGameId: 0,
 };
@@ -22,23 +22,20 @@ export const gameSlice = createSlice({
   initialState,
   reducers: {
     gamesFetching(state) {
-      state.isLoading = true;
+      state.isLoadingGames = true;
     },
     gamesFetchingSuccess(state, action: PayloadAction<IGame[]>) {
-      state.isLoading = false;
-      state.error = '';
+      state.isLoadingGames = false;
+      state.errorFetchGames = '';
       state.games = action.payload;
     },
     gamesFetchingError(state, action: PayloadAction<string>) {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    gameFetching(state) {
-      state.isLoading = true;
+      state.isLoadingGames = false;
+      state.errorFetchGames = action.payload;
     },
     gameFetchingSuccess(state, action: PayloadAction<IGamePrimary>) {
-      state.isLoading = false;
-      state.error = '';
+      state.isLoadingGames = false;
+      state.errorFetchGames = '';
       state.downloadGames[state.currentGameId] = action.payload;
     },
     setCurrentGameId(state, action: PayloadAction<number>) {

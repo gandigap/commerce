@@ -63,6 +63,13 @@ const PayButton = styled.button`
   ${buttonFormAndCard}
 `;
 
+const _gameCardSubTitles = {
+  genres: ' Genres:',
+  dateRelease: 'Release date:',
+};
+
+const _textPayButton = 'Add';
+
 const GameCardAdditionalInfo: React.FC<IGameCardProps> = ({ gameData }) => {
   const genres = gameData.genres.map((genre: any) => {
     return (
@@ -81,7 +88,7 @@ const GameCardAdditionalInfo: React.FC<IGameCardProps> = ({ gameData }) => {
     <GameCardAdditionalInfoContainer>
       <GameCardAdditionalInfoContainerSubject>
         <GameCardAdditionalInfoContainerSubjectTitle>
-          Genres
+          {_gameCardSubTitles.genres}
         </GameCardAdditionalInfoContainerSubjectTitle>
         <GameCardAdditionalInfoContainerSubjectContent>
           {genres}
@@ -90,14 +97,14 @@ const GameCardAdditionalInfo: React.FC<IGameCardProps> = ({ gameData }) => {
 
       <GameCardAdditionalInfoContainerSubject>
         <GameCardAdditionalInfoContainerSubjectTitle>
-          Release date:
+          {_gameCardSubTitles.dateRelease}
         </GameCardAdditionalInfoContainerSubjectTitle>
         <GameCardAdditionalInfoContainerSubjectContent>
           {dateRelease()}
         </GameCardAdditionalInfoContainerSubjectContent>
       </GameCardAdditionalInfoContainerSubject>
       <PayButton>
-        Add <FontAwesomeIcon icon={faGift} className="fontawesome__icon" />
+        {_textPayButton} <FontAwesomeIcon icon={faGift} className="fontawesome__icon" />
       </PayButton>
     </GameCardAdditionalInfoContainer>
   );

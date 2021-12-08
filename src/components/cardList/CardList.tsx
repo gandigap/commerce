@@ -5,8 +5,9 @@ import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks';
 import { fetchGames } from 'store/reducers/ActionCreators';
 import { IGame } from 'interfaces/gameInterfaces';
-import GameCard from './GameCard.tsx/GameCard';
+import GameCard from './gameCard.tsx/GameCard';
 import SectionTitle from 'components/SectionTitle/SectionTitle';
+import { useLocation } from 'react-router-dom';
 
 const CardListContainer = styled.div`
   display: grid;
@@ -27,8 +28,11 @@ const CardListContainer = styled.div`
 `;
 
 const CardList = () => {
-  const { games, isLoading, error } = useAppSelector((state) => state.gameReducer);
+  const { games, isLoadingGames, errorFetchGames } = useAppSelector((state) => state.gameReducer);
   const dispatch = useAppDispatch();
+  const location = useLocation();
+
+  console.log(location, 'location');
 
   useEffect(() => {
     games.length === 0 && dispatch(fetchGames());
@@ -38,8 +42,8 @@ const CardList = () => {
     <>
       <SectionTitle />
       <CardListContainer>
-        {isLoading && <h3>Идет загрузка</h3>}
-        {error && <h3>{error}</h3>}
+        {isLoadingGames && <h3>Идет загрузка</h3>}
+        {errorFetchGames && <h3>{errorFetchGames}</h3>}
         {games.map((game: IGame) => (
           <GameCard key={game.id} gameData={game} />
         ))}

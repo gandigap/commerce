@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
+import { IGameCardProps } from 'interfaces/gameInterfaces';
+import GameCardAdditionalInfo from './GameCardAdditionalInfo';
+import GameCardInfo from './GameCardInfo';
+import GameCardMedia from './GameCardMedia';
+
 import styled from 'styled-components';
 import 'react-awesome-slider/src/styles';
-
-import GameCardMedia from './GameCardMedia';
-import GameCardInfo from './GameCardInfo';
-import GameCardAdditionalInfo from './GameCardAdditionalInfo';
-import { IGameCardProps } from 'interfaces/gameInterfaces';
 
 const GameCardWrapper = styled.div`
   &:hover {
