@@ -8,6 +8,8 @@ import { IGame } from 'interfaces/gameInterfaces';
 import GameCard from './gamesCard.tsx/GameCard';
 import PageTitleContainer from 'components/pageTitle/PageTitle';
 import { useLocation } from 'react-router-dom';
+import { IData } from 'interfaces/dataInterfaces';
+import DataCard from './dataCard/DataCard';
 
 const CardListContainer = styled.div`
   display: grid;
@@ -29,10 +31,11 @@ const CardListContainer = styled.div`
 
 const CardList = () => {
   const { games, isLoadingGames, errorFetchGames } = useAppSelector((state) => state.gameReducer);
+  const { data, isLoading, error } = useAppSelector((state) => state.dataReducer);
   const dispatch = useAppDispatch();
-  const location = useLocation();
+  const path = useLocation().pathname;
 
-  console.log(location, 'location');
+  console.log(path, 'location');
 
   useEffect(() => {
     games.length === 0 && dispatch(fetchGames());
@@ -44,9 +47,9 @@ const CardList = () => {
       <CardListContainer>
         {isLoadingGames && <h3>Идет загрузка</h3>}
         {errorFetchGames && <h3>{errorFetchGames}</h3>}
-        {games.map((game: IGame) => (
-          <GameCard key={game.id} gameData={game} />
-        ))}
+        {path === '/' || path === '/games'
+          ? games.map((game: IGame) => <GameCard key={game.id} gameData={game} />)
+          : data.map((dataInfo: IData) => <DataCard key={dataInfo.id} info={dataInfo} />)}
       </CardListContainer>
     </>
   );
