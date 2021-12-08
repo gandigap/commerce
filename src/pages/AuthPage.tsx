@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
 import AuthForm from 'components/form/AuthForm';
-import Logo from 'components/header/Logo/Logo';
+import Logo from 'components/pageHeader/Logo/Logo';
 
 import styled from 'styled-components';
 import { headerAndFormLink, headerAndFormLinkHover, pseudoSeparator } from 'styles/mixins';

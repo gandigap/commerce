@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks';
 import { fetchGames } from 'store/reducers/ActionCreators';
 import { IGame } from 'interfaces/gameInterfaces';
-import GameCard from './gameCard.tsx/GameCard';
-import SectionTitle from 'components/SectionTitle/SectionTitle';
+import GameCard from './gamesCard.tsx/GameCard';
+import PageTitleContainer from 'components/pageTitle/PageTitle';
 import { useLocation } from 'react-router-dom';
 
 const CardListContainer = styled.div`
@@ -40,7 +40,7 @@ const CardList = () => {
 
   return (
     <>
-      <SectionTitle />
+      <PageTitleContainer />
       <CardListContainer>
         {isLoadingGames && <h3>Идет загрузка</h3>}
         {errorFetchGames && <h3>{errorFetchGames}</h3>}
