@@ -1,4 +1,4 @@
-import { IDataGeneral } from './dataInterfaces';
+import { IData } from './dataInterfaces';
 
 export interface IGameCardProps {
   gameData: IGame;
@@ -39,8 +39,8 @@ export interface IGamePrimary {
   website: string;
   rating: { id: number; title: string; count: number; percent: number }[];
   added: number;
-  stores: { id: number; store: IDataGeneral }[];
-  developers: IDataGeneral[];
-  tags: IDataGeneral[];
-  publishers: IDataGeneral[];
+  stores: { id: number; store: IData }[];
+  developers: IData[];
+  tags: IData[];
+  publishers: IData[];
 }

@@ -1,4 +1,4 @@
-import { IDataGeneral } from 'interfaces/dataInterfaces';
+import { IData } from 'interfaces/dataInterfaces';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ const GameDeveloperContainer = styled.div`
 `;
 
 type Props = {
-  developerInfo: IDataGeneral;
+  developerInfo: IData;
 };
 
 const GameDeveloper: React.FC<Props> = ({ developerInfo }) => {

@@ -1,10 +1,11 @@
-import { IDataGeneral } from 'interfaces/dataInterfaces';
 import React from 'react';
 
-import styled from 'styled-components';
 import GameDeveloper from './GameDeveloper';
 import GameStores from './GameStores';
 import GameTag from './GameTag';
+import { IData } from 'interfaces/dataInterfaces';
+
+import styled from 'styled-components';
 
 const GameAsideContainer = styled.aside`
   min-width: 300px;
@@ -26,10 +27,10 @@ const GameAsideContent = styled.div`
 
 interface IGameAside {
   title: string;
-  tags?: IDataGeneral[];
-  publishers?: IDataGeneral[];
-  developers?: IDataGeneral[];
-  stores?: { id: number; store: IDataGeneral }[];
+  tags?: IData[];
+  publishers?: IData[];
+  developers?: IData[];
+  stores?: { id: number; store: IData }[];
 }
 
 const GameAside: React.FC<IGameAside> = ({ title, tags, publishers, developers, stores }) => {

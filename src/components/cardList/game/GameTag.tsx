@@ -1,4 +1,4 @@
-import { IDataGeneral } from 'interfaces/dataInterfaces';
+import { IData } from 'interfaces/dataInterfaces';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ const GameTagContainer = styled.div`
 `;
 
 type Props = {
-  tagInfo: IDataGeneral;
+  tagInfo: IData;
 };
 
 const GameTag: React.FC<Props> = ({ tagInfo }) => {

@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
-
-import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks';
 import { fetchGames } from 'store/reducers/ActionCreators';
 import { IGame } from 'interfaces/gameInterfaces';
 import GameCard from './gamesCard.tsx/GameCard';
-import PageTitleContainer from 'components/pageTitle/PageTitle';
-import { useLocation } from 'react-router-dom';
+import PageTitleContainer from 'components/sectionTitle/SectionTitle';
 import { IData } from 'interfaces/dataInterfaces';
 import DataCard from './dataCard/DataCard';
+
+import styled from 'styled-components';
 
 const CardListContainer = styled.div`
   display: grid;
@@ -31,11 +31,9 @@ const CardListContainer = styled.div`
 
 const CardList = () => {
   const { games, isLoadingGames, errorFetchGames } = useAppSelector((state) => state.gameReducer);
-  const { data, isLoading, error } = useAppSelector((state) => state.dataReducer);
+  const { data } = useAppSelector((state) => state.dataReducer);
   const dispatch = useAppDispatch();
   const path = useLocation().pathname;
-
-  console.log(path, 'location');
 
   useEffect(() => {
     games.length === 0 && dispatch(fetchGames());

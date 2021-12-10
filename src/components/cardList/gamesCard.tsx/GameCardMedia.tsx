@@ -37,7 +37,7 @@ const GameCardMedia: React.FC<IGameCardMedia> = ({ cardHoverState, gameData }) =
     <GameCardMediaContainer>
       <GameCardImagePreview
         style={{
-          backgroundImage: 'url(' + gameData.background_image + ')',
+          backgroundImage: `url(${gameData.background_image})`,
         }}
       />
       <GameCardMediaSlider style={{ width: `${cardHoverState ? '100%' : '0px'}` }}>
