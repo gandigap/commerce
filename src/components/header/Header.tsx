@@ -1,14 +1,13 @@
 import React from 'react';
 
 import Logo from './Logo/Logo';
-import ThemeSwitcher from './ThemeSwitcher/ThemeSwitcher';
 import SearchInput from './SearchInput/SearchInput';
 import LoginContent from './LoginContent/LoginContent';
-
-import styled from 'styled-components';
-
+import ThemeSwitcher from './ThemeSwitcher/ThemeSwitcher';
 import { useAuth } from 'hooks/auth-hook';
 import AuthContent from './LoginContent/AuthContent';
+
+import styled from 'styled-components';
 import { headerAndFormLink, headerAndFormLinkHover } from 'styles/mixins';
 
 const HeaderContainer = styled.header`
@@ -51,7 +50,6 @@ const Header = () => {
       <Logo />
       <SearchInput />
       <AuthHeaderContainer>{isAuth ? <AuthContent /> : <LoginContent />}</AuthHeaderContainer>
-      
     </HeaderContainer>
   );
 };

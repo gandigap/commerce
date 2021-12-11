@@ -11,12 +11,14 @@ const ThemeSwitcher = () => {
   const setDarkTheme = useCallback(() => {
     localStorage.setItem('theme', 'active');
     document.documentElement.setAttribute('data-theme', 'dark');
-  }, []);
+    setChecked(!isChecked);
+  }, [isChecked]);
 
   const setLigthTheme = useCallback(() => {
     localStorage.removeItem('theme');
     document.documentElement.setAttribute('data-theme', 'ligth');
-  }, []);
+    setChecked(!isChecked);
+  }, [isChecked]);
 
   const switcherHandler = useCallback(
     (e) => {
@@ -26,11 +28,11 @@ const ThemeSwitcher = () => {
   );
   useEffect(() => {
     if (localStorage.getItem('theme')) {
-      setChecked(!isChecked);
+      setChecked(true);
       document.documentElement.setAttribute('data-theme', 'dark');
     }
-  }, [isChecked]);
-
+  }, []);
+  console.log('input');
   return (
     <ThemeSwitcherContainer>
       <ThemeSwitcherLabel className="switch" htmlFor="checkbox">
@@ -38,7 +40,7 @@ const ThemeSwitcher = () => {
           type="checkbox"
           id="checkbox"
           onChange={switcherHandler}
-          defaultChecked={isChecked}
+          checked={isChecked}
         />
         <ThemeSwitcherIcon className="switch__icon"></ThemeSwitcherIcon>
       </ThemeSwitcherLabel>

@@ -14,6 +14,7 @@ import { _authPageTypes, _listNavTitles, _modalTypes } from 'constants/constants
 import './styles/_global.scss';
 import { useAppDispatch } from 'hooks/redux-hooks';
 import { userSlice } from 'store/reducers/UserSlice';
+import DataList from 'components/cardList/DataList';
 
 function App() {
   const [isModalOpen, setShowModal] = useState(false);
@@ -61,7 +62,7 @@ function App() {
           <Route path="games/:slug" element={<Game />} />
           <Route path="stores" element={<Other />} />
           {_listNavTitles.map((path, index) => (
-            <Route path={path.toLowerCase()} element={<CardList />} key={`${path}_path`} />
+            <Route path={path.toLowerCase()} element={<DataList />} key={`${path}_path`} />
           ))}
         </Route>
         <Route path="login" element={<AuthPage type={_authPageTypes.log} />} />
