@@ -5,16 +5,18 @@ export interface IData {
   games_count: number;
   image?: string | null;
   image_background: string;
-  positions?: IPositions[];
+  positions?: IGeneralInfo[];
   domain?: string;
+  games: IGeneralInfo[];
 }
 
 export interface IFetchData {
   results: IData[];
 }
 
-export interface IPositions {
+export interface IGeneralInfo {
   id: number;
   name: string;
   slug: string;
+  added?: number;
 }
