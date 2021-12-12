@@ -8,11 +8,10 @@ import DataCardInfoGames from './DataCardInfoGames';
 import styled from 'styled-components';
 
 const DataCardWrapper = styled.div`
-  margin: 10px;
+  padding: 10px;
   border: 1px solid var(--color-3);
   display: flex;
   flex-direction: column;
-  align-items: center;
   background-position: 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -21,6 +20,7 @@ const DataCardWrapper = styled.div`
 
 const DataCardTitle = styled.h3`
   padding: 20px 0;
+  text-align: center;
   font-size: 24px;
   font-weight: bold;
   color: #fff;
@@ -42,7 +42,7 @@ const GamesInfoWrapper = styled.div`
   padding: 10px 0;
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   color: var(--color-5);
 `;
 

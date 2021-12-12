@@ -26,7 +26,7 @@ const DataCardPositions: React.FC<IProps> = ({ positions }) => {
     <DataCardPositionsContainer>
       {positions.map((position: IGeneralInfo, index: number) => {
         return (
-          <DataCardPosition>
+          <DataCardPosition key={position.slug}>
             {`${position.slug} ${index !== positions.length - 1 ? ' / ' : ' '}`}&nbsp;
           </DataCardPosition>
         );

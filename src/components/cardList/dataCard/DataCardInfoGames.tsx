@@ -20,7 +20,7 @@ const DataCardInfoGames: React.FC<IProps> = ({ games }) => {
   return (
     <DataCardInfoGamesContainer>
       {games.map((game: IGeneralInfo, index: number) => {
-        return index < 3 && <DataCardGameList>{`${game.slug}`}</DataCardGameList>;
+        return index < 3 && <DataCardGameList key={game.slug}>{`${game.slug}`}</DataCardGameList>;
       })}
     </DataCardInfoGamesContainer>
   );
