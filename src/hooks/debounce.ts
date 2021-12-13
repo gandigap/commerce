@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 
 const useDebounce = (callback: any, delay: number) => {
   const timer = useRef<any>();

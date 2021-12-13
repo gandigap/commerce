@@ -13,12 +13,13 @@ import { headerAndFormLink, headerAndFormLinkHover } from 'styles/mixins';
 const HeaderContainer = styled.header`
   margin: 20px;
   display: flex;
-  justify-content: space-between;
 `;
 
 const AuthHeaderContainer = styled.div`
   display: flex;
   align-items: center;
+  flex-grow: 1;
+  justify-content: flex-end;
 
   & a {
     margin: 0 10px;

@@ -28,6 +28,9 @@ export const searchSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    clearSearchList(state) {
+      state.searchGames = [];
+    },
   },
 });
 
