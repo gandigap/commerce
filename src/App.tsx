@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import ContentLayout from 'pages/MainPage';
-import CardList from 'components/cardList/CardList';
+import GameList from 'components/cardList/GameList';
 import Game from 'components/cardList/game/Game';
 import Other from 'components/cardList/Other';
 import AuthPage from 'pages/AuthPage';
@@ -58,11 +58,18 @@ function App() {
       </Modal>
       <Routes>
         <Route path="/" element={<ContentLayout />}>
-          <Route index element={<CardList />} />
+          <Route index element={<GameList />} />
           <Route path="games/:slug" element={<Game />} />
           <Route path="stores" element={<Other />} />
           {_listNavTitles.map((path, index) => (
             <Route path={path.toLowerCase()} element={<DataList />} key={`${path}_path`} />
+          ))}
+          {_listNavTitles.map((path, index) => (
+            <Route
+              path={`${path.toLowerCase()}/:slug`}
+              element={<GameList />}
+              key={`${path}_path_slug`}
+            />
           ))}
         </Route>
         <Route path="login" element={<AuthPage type={_authPageTypes.log} />} />

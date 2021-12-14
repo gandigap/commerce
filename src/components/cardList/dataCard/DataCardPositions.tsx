@@ -9,12 +9,12 @@ const DataCardPositionsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-
   color: var(--color-5);
 `;
 
 const DataCardPosition = styled.div`
   font-size: 12px;
+  font-weight: bold;
 `;
 
 type IProps = {

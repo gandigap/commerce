@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -14,10 +14,13 @@ const Title = styled.h3`
 
 const SectionTitle = () => {
   const path = useLocation().pathname;
+  const params = useParams();
 
   return (
     <SectionTitleContainer>
-      <Title>{path && path === '/' ? 'GAMES' : path.slice(1).toUpperCase()}</Title>
+      <Title>
+        {params.slug ? params.slug : path === '/' ? 'GAMES' : path.slice(1).toUpperCase()}
+      </Title>
     </SectionTitleContainer>
   );
 };

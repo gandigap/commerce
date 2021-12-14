@@ -22,6 +22,26 @@ export const fetchGames = () => async (dispatch: AppDispatch) => {
   }
 };
 
+export const fetchGamesByParams =
+  (category: string, value: string) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(gameSlice.actions.gamesFetching());
+      const response = await axios.get<IFetchGames>(
+        `https://api.rawg.io/api/games?${category}=${value}`,
+        {
+          params: {
+            key: 'dc31c2a55aa444959f74eb7bc96b0617',
+            page: 1,
+            page_size: 30,
+          },
+        },
+      );
+      dispatch(gameSlice.actions.gamesFetchingSuccess(response.data.results));
+    } catch (e: any) {
+      dispatch(gameSlice.actions.gamesFetchingError(e.message));
+    }
+  };
+
 export const fetchDataByCategory =
   (category: string, pageNumber: number, pageSizeNumber: number) =>
   async (dispatch: AppDispatch) => {

@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 
+import { useParams, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks';
-import { fetchGames } from 'store/reducers/ActionCreators';
+import { fetchGames, fetchGamesByParams } from 'store/reducers/ActionCreators';
 import { IGame } from 'interfaces/gameInterfaces';
 import GameCard from './gamesCard.tsx/GameCard';
 import PageTitleContainer from 'components/sectionTitle/SectionTitle';
@@ -26,12 +27,21 @@ const CardListContainer = styled.div`
   }
 `;
 
-const CardList = () => {
+const GameList = () => {
   const { games, isLoadingGames, errorFetchGames } = useAppSelector((state) => state.gameReducer);
   const dispatch = useAppDispatch();
+  const params = useParams();
+  const path = useLocation().pathname;
 
   useEffect(() => {
-    games.length === 0 && dispatch(fetchGames());
+    console.log('games rerender');
+    if (games.length === 0) {
+      const pathParams = path.split('/');
+      const category = pathParams[1];
+      const value = pathParams[2];
+      params.slug ? dispatch(fetchGamesByParams(category, value)) : dispatch(fetchGames());
+    }
+    console.log(params, 'params');
   }, [dispatch, games.length]);
 
   return (
@@ -48,4 +58,4 @@ const CardList = () => {
   );
 };
 
-export default CardList;
+export default GameList;

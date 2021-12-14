@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
+import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks';
+import { fetchGamesByParams } from 'store/reducers/ActionCreators';
 import { IData } from 'interfaces/dataInterfaces';
 import DataCardPositions from './DataCardPositions';
 import DataCardInfoGames from './DataCardInfoGames';
+import UserIcon from 'images/user.svg';
 
 import styled from 'styled-components';
 
@@ -12,6 +16,7 @@ const DataCardWrapper = styled.div`
   border: 1px solid var(--color-3);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   background-position: 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -31,7 +36,7 @@ const DataCardTitle = styled.h3`
 `;
 
 const DataCreatorImage = styled.img`
-  margin: 10px 0;
+  margin: 10px auto;
   width: 60px;
   height: 60px;
   border: 1px solid #fff;
@@ -43,21 +48,32 @@ const GamesInfoWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   color: var(--color-5);
 `;
 
-const GamesInfoTitle = styled.div`
+const GamesInfoTitle = styled.p`
   font-size: 18px;
   font-weight: bold;
 `;
 
-const GamesInfoValue = styled.div``;
+const GamesInfoValue = styled.p`
+  font-size: 18px;
+  font-weight: bold;
+`;
 
 type IProps = {
   info: IData;
 };
 
 const DataCard: React.FC<IProps> = ({ info }) => {
+  const path = useLocation().pathname;
+  const dispatch = useAppDispatch();
+  const category = path.slice(1);
+  const handleClickTitle = useCallback(() => {
+    dispatch(fetchGamesByParams(category, info.slug));
+  }, []);
+
   return (
     <DataCardWrapper
       style={{
@@ -65,17 +81,18 @@ const DataCard: React.FC<IProps> = ({ info }) => {
           info.image_background
         }) `,
       }}>
-      <Link to={`games/${info.slug}`}>
+      <Link to={category === 'platforms' ? `${info.id}` : info.slug} onClick={handleClickTitle}>
         <DataCardTitle>{info.name}</DataCardTitle>
       </Link>
-      {info.image && <DataCreatorImage src={info.image} />}
+      {path.slice(1) === 'creators' && (
+        <DataCreatorImage src={info.image ? info.image : UserIcon} />
+      )}
       {info.positions && <DataCardPositions positions={info.positions} />}
       <GamesInfoWrapper>
         <GamesInfoTitle>Count games</GamesInfoTitle>
         <GamesInfoValue>{info.games_count}</GamesInfoValue>
+        <DataCardInfoGames games={info.games} />
       </GamesInfoWrapper>
-
-      <DataCardInfoGames games={info.games} />
     </DataCardWrapper>
   );
 };
