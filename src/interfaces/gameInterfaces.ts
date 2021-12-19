@@ -33,6 +33,7 @@ export interface IFetchGames {
 export interface IGamePrimary {
   id: number;
   name: string;
+  slug: string;
   released: string;
   description_raw: string;
   background_image: string;

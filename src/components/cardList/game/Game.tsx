@@ -43,37 +43,34 @@ const GameImage = styled.img`
 `;
 
 const Game = () => {
-  const { currentGameId, downloadGames } = useAppSelector((state) => state.gameReducer);
+  const { downloadGames } = useAppSelector((state) => state.gameReducer);
   const dispatch = useAppDispatch();
   const { slug } = useParams();
 
   useEffect(() => {
-    if (!downloadGames[currentGameId]) {
+    if (slug && !downloadGames[slug]) {
       if (slug) {
         dispatch(fetchGame(slug));
       }
     }
-  }, [currentGameId, dispatch, downloadGames, slug]);
+  }, [dispatch, downloadGames, slug]);
 
   return (
     <>
-      {downloadGames[currentGameId] ? (
+      {slug && downloadGames[slug] ? (
         <>
-          <GameTitle>{downloadGames[currentGameId].name}</GameTitle>
+          <GameTitle>{downloadGames[slug].name}</GameTitle>
           <GameContainer>
             <GameMainInfo>
               <GameImageContainer>
-                <GameImage src={downloadGames[currentGameId].background_image}></GameImage>
+                <GameImage src={downloadGames[slug].background_image}></GameImage>
               </GameImageContainer>
-              <GameDescription>{downloadGames[currentGameId].description_raw}</GameDescription>
+              <GameDescription>{downloadGames[slug].description_raw}</GameDescription>
             </GameMainInfo>
             <GameAdditionalInfo>
-              <GameAside title={'tags'} tags={downloadGames[currentGameId].tags} />
-              <GameAside
-                title={'developers'}
-                developers={downloadGames[currentGameId].developers}
-              />
-              <GameAside title={'stores'} stores={downloadGames[currentGameId].stores} />
+              <GameAside title={'tags'} tags={downloadGames[slug].tags} />
+              <GameAside title={'developers'} developers={downloadGames[slug].developers} />
+              <GameAside title={'stores'} stores={downloadGames[slug].stores} />
             </GameAdditionalInfo>
           </GameContainer>
         </>

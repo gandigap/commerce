@@ -1,6 +1,5 @@
 export const _modalTypes = {
-  updateUserInfo: 'updateUserInfo',
-  updateGameInfo: 'updateGameInfo',
+  wishList: 'wishList',
 };
 
 export const _authPageTypes = {

@@ -21,7 +21,7 @@ type IProps = {
 };
 
 const SearchList: React.FC<IProps> = ({ display }) => {
-  const { searchGames, isLoading, error } = useAppSelector((state) => state.searchReducer);
+  const { searchGames } = useAppSelector((state) => state.searchReducer);
 
   return (
     <SearchListContainer style={{ display: `${display ? 'block' : 'none'}` }}>

@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks';
+import { useAppDispatch } from 'hooks/redux-hooks';
 import { fetchGamesByParams } from 'store/reducers/ActionCreators';
 import { IData } from 'interfaces/dataInterfaces';
 import DataCardPositions from './DataCardPositions';
@@ -72,7 +72,7 @@ const DataCard: React.FC<IProps> = ({ info }) => {
   const category = path.slice(1);
   const handleClickTitle = useCallback(() => {
     dispatch(fetchGamesByParams(category, info.slug));
-  }, []);
+  }, [category, dispatch, info.slug]);
 
   return (
     <DataCardWrapper

@@ -6,7 +6,7 @@ import { _modalTypes } from 'constants/constants';
 import styled from 'styled-components';
 
 import ModalContext from 'components/modal/ModalContext';
-import { faCogs, faDoorClosed } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faDoorClosed } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const EmailInfo = styled.p`
@@ -41,8 +41,8 @@ const AuthContent = () => {
   }, [dispatch, removeUser]);
 
   const value = useContext(ModalContext);
-  const openModalForAddAlbum = useCallback(() => {
-    value.setTypeModal(_modalTypes.updateUserInfo);
+  const openWishList = useCallback(() => {
+    value.setTypeModal(_modalTypes.wishList);
     value.setShowModal(!value.isModalOpen);
   }, [value]);
   return (
@@ -51,8 +51,8 @@ const AuthContent = () => {
       <Button onClick={logoutHandleClick}>
         <FontAwesomeIcon icon={faDoorClosed} />
       </Button>
-      <Button onClick={openModalForAddAlbum}>
-        <FontAwesomeIcon icon={faCogs} />
+      <Button onClick={openWishList}>
+        <FontAwesomeIcon icon={faShoppingCart} />
       </Button>
     </>
   );

@@ -1,13 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IUser } from 'interfaces/userInterfaces';
+import { IGame } from 'interfaces/gameInterfaces';
+
 interface IUserState {
   user: IUser;
+  wishList: { [key: string]: IGame };
   isLoading: boolean;
   error: string;
 }
 
 const initialState: IUserState = {
   user: { email: '', token: '', id: '' },
+  wishList: {},
   isLoading: false,
   error: '',
 };
@@ -32,6 +36,9 @@ export const userSlice = createSlice({
       state.user.email = '';
       state.user.token = '';
       state.user.id = '';
+    },
+    addGameToWishList(state, action: PayloadAction<IGame>) {
+      state.wishList[action.payload.slug] = action.payload;
     },
   },
 });

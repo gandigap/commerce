@@ -69,7 +69,6 @@ export const fetchGame = (slug: string) => async (dispatch: AppDispatch) => {
       },
     });
     dispatch(gameSlice.actions.gameFetchingSuccess(response.data));
-    dispatch(gameSlice.actions.setCurrentGameId(response.data.id));
   } catch (e: any) {
     dispatch(gameSlice.actions.gamesFetchingError(e.message));
   }

@@ -15,6 +15,7 @@ import './styles/_global.scss';
 import { useAppDispatch } from 'hooks/redux-hooks';
 import { userSlice } from 'store/reducers/UserSlice';
 import DataList from 'components/cardList/DataList';
+import WishList from 'components/wishList/WishList';
 
 function App() {
   const [isModalOpen, setShowModal] = useState(false);
@@ -42,10 +43,8 @@ function App() {
 
   const changeContentModal = useCallback(() => {
     switch (valueModalContext.typeModal) {
-      case _modalTypes.updateUserInfo:
-        return <p>B</p>;
-      case _modalTypes.updateGameInfo:
-        return <p>A</p>;
+      case _modalTypes.wishList:
+        return <WishList />;
       default:
         return <p>C</p>;
     }

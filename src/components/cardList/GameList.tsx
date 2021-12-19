@@ -42,7 +42,7 @@ const GameList = () => {
       params.slug ? dispatch(fetchGamesByParams(category, value)) : dispatch(fetchGames());
     }
     console.log(params, 'params');
-  }, [dispatch, games.length]);
+  }, [dispatch, games.length, params, path]);
 
   return (
     <>
