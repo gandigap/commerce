@@ -20,14 +20,15 @@ import WishList from 'components/wishList/WishList';
 function App() {
   const [isModalOpen, setShowModal] = useState(false);
   const [typeModal, setTypeModal] = useState('register_form');
+  const dispatch = useAppDispatch();
+  const { userFetchingSuccess } = userSlice.actions;
+
   const valueModalContext = {
     isModalOpen,
     setShowModal,
     typeModal,
     setTypeModal,
   };
-  const dispatch = useAppDispatch();
-  const { userFetchingSuccess } = userSlice.actions;
 
   const changeStateModal = useCallback(
     (e) => {
@@ -73,7 +74,6 @@ function App() {
         </Route>
         <Route path="login" element={<AuthPage type={_authPageTypes.log} />} />
         <Route path="register" element={<AuthPage type={_authPageTypes.reg} />} />
-
         <Route path="*" element={<p>Not found page</p>} />
       </Routes>
     </ModalContext.Provider>

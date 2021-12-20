@@ -7,9 +7,8 @@ export const ModalOverlayContainer = styled.div`
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
   background-color: var(--color-2);
-  z-index: 3;
+  z-index: 15;
 `;
 
 export const ModalContentContainer = styled.div`

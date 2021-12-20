@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { faGift } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IGameCardProps } from 'interfaces/gameInterfaces';
-import { useAppDispatch } from 'hooks/redux-hooks';
+import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks';
 
 import { buttonFormAndCard } from 'styles/mixins';
 import styled from 'styled-components';
@@ -73,10 +73,12 @@ const _gameCardSubTitles = {
 const _textPayButton = 'Add';
 
 const GameCardAdditionalInfo: React.FC<IGameCardProps> = ({ gameData }) => {
+  const { wishList } = useAppSelector((state) => state.userReducer);
   const dispatch = useAppDispatch();
   const handleWishButton = useCallback(() => {
     dispatch(userSlice.actions.addGameToWishList({ ...gameData }));
   }, [dispatch, gameData]);
+
   const genres = gameData.genres.map((genre: any) => {
     return (
       <Link key={`${gameData.id}_${genre.name}`} to={`games/${genre.slug}`}>
@@ -109,7 +111,13 @@ const GameCardAdditionalInfo: React.FC<IGameCardProps> = ({ gameData }) => {
           {dateRelease()}
         </GameCardAdditionalInfoContainerSubjectContent>
       </GameCardAdditionalInfoContainerSubject>
-      <WishButton onClick={handleWishButton}>
+      <WishButton
+        onClick={handleWishButton}
+        style={
+          wishList.hasOwnProperty(gameData.slug)
+            ? { backgroundColor: 'var(--color-success)' }
+            : { backgroundColor: 'var(--color-3)' }
+        }>
         {_textPayButton} <FontAwesomeIcon icon={faGift} className="fontawesome__icon" />
       </WishButton>
     </GameCardAdditionalInfoContainer>
