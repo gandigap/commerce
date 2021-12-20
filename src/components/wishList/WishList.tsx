@@ -1,3 +1,4 @@
+import { useAppSelector } from 'hooks/redux-hooks';
 import React from 'react';
 
 import styled from 'styled-components';
@@ -11,23 +12,17 @@ export const WishListCTitle = styled.h2`
 
 export const WishListTable = styled.table``;
 
-export const WishListTableThead = styled.thead``;
-export const WishListTableTbody = styled.tbody``;
-
 const WishList: React.FC = () => {
+  const { wishList } = useAppSelector((state) => state.userReducer);
   return (
     <WishListContainer>
       <WishListCTitle>WishList</WishListCTitle>
-      <WishListTableThead>
-        <tr>
-          <th>Game</th>
-        </tr>
-      </WishListTableThead>
-      <WishListTableTbody>
-        <tr>
-          <td>Id</td>
-        </tr>
-      </WishListTableTbody>
+      <WishListTable>
+        {wishList &&
+          Object.entries(wishList).map(([key, value]) => {
+            return <p>{key}</p>;
+          })}
+      </WishListTable>
     </WishListContainer>
   );
 };
