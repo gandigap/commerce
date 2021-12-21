@@ -1,18 +1,18 @@
 import React from 'react';
 import { MouseEventHandler } from 'react';
-import { ModalOverlayContainer } from './FormElements';
+import { ModalOverlayContainer } from './FormStyleElements';
 
 interface Props {
-  onClickHandler: MouseEventHandler<HTMLDivElement>,
-  renderSection?: () => JSX.Element
+  onClickHandler: MouseEventHandler<HTMLDivElement>;
+  renderSection?: () => JSX.Element;
 }
 
 const ModalOverlay: React.FC<Props> = ({ onClickHandler, renderSection }) => {
   return (
-    <ModalOverlayContainer id='modal__overlay' onClick={onClickHandler}>
+    <ModalOverlayContainer id="modal__overlay" onClick={onClickHandler}>
       {renderSection && renderSection()}
     </ModalOverlayContainer>
   );
-}
+};
 
 export default ModalOverlay;

@@ -43,6 +43,9 @@ export const userSlice = createSlice({
     deleteGameFromWishList(state, action: PayloadAction<string>) {
       delete state.wishList[action.payload];
     },
+    clearWishList(state, action: PayloadAction<void>) {
+      state.wishList = {};
+    },
   },
 });
 

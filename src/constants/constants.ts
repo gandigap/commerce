@@ -1,5 +1,6 @@
 export const _modalTypes = {
-  wishList: 'wishList',
+  wishListModal: 'wishList',
+  successModal: 'success',
 };
 
 export const _authPageTypes = {
@@ -26,3 +27,12 @@ export const _errorMessages = {
 export const _listNavTitles = ['Genres', 'Platforms', 'Creators', 'Tags'];
 
 export const _localeStorageItems = ['email', 'refreshToken', 'uid'];
+
+export const _customPrice = 5;
+
+export const _wishListTitles ={
+  main:'WishList',
+  empty:'WishList',
+}
+
+export const _wishListButtonSubmitValue = 'Submit'

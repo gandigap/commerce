@@ -44,10 +44,12 @@ function App() {
 
   const changeContentModal = useCallback(() => {
     switch (valueModalContext.typeModal) {
-      case _modalTypes.wishList:
+      case _modalTypes.wishListModal:
         return <WishList />;
+      case _modalTypes.successModal:
+        return <p>Success</p>;
       default:
-        return <p>C</p>;
+        return <WishList />;
     }
   }, [valueModalContext.typeModal]);
 

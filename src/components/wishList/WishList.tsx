@@ -1,40 +1,26 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks';
 
-import styled from 'styled-components';
 import { userSlice } from 'store/reducers/UserSlice';
-
-export const WishListContainer = styled.div`
-  margin: 50px auto;
-  padding: 20px;
-  -webkit-box-shadow: 0px 0px 10px 0px var(--color-4);
-  box-shadow: 0px 0px 10px 0px var(--color-4);
-`;
-
-export const WishListTitle = styled.h2`
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-`;
-
-export const WishListImage = styled.img`
-  padding: 5px;
-  width: 50px;
-  /* height: 50px; */
-  border-radius: 50%;
-`;
-
-export const WishListTable = styled.table`
-  /* border: 1px solid var(--color-3); */
-`;
-
-export const WishListTableRow = styled.tr`
-  border-bottom: 3px solid var(--color-1);
-`;
-
-export const WishListTableCell = styled.td`
-  padding: 5px;
-`;
+import {
+  WishListContainer,
+  WishListTitle,
+  WishListTable,
+  WishListTbody,
+  WishListTableRow,
+  WishListTableCell,
+  WishListButtonDeleteGame,
+  WishListResultContainer,
+  WishListResultTitle,
+  WishListResultButton,
+} from './WishListStyleElements';
+import {
+  _customPrice,
+  _modalTypes,
+  _wishListButtonSubmitValue,
+  _wishListTitles,
+} from 'constants/constants';
+import ModalContext from 'components/modal/ModalContext';
 
 const WishList: React.FC = () => {
   const { wishList } = useAppSelector((state) => state.userReducer);
@@ -45,25 +31,49 @@ const WishList: React.FC = () => {
     },
     [dispatch],
   );
-  console.log(Object.keys(wishList));
+
+  const modalContext = useContext(ModalContext);
+  const handleSubmit = useCallback(() => {
+    dispatch(userSlice.actions.clearWishList());
+    modalContext.setTypeModal(_modalTypes.successModal);
+    setTimeout(() => modalContext.setShowModal(!modalContext.isModalOpen), 3000);
+  }, [dispatch, modalContext]);
+
+  const countGamesInWishList = Object.keys(wishList).length;
   return (
     <WishListContainer>
-      <WishListTitle>WishList</WishListTitle>
+      <WishListTitle>{_wishListTitles.main}</WishListTitle>
       <WishListTable>
-        {wishList &&
-          Object.entries(wishList).map(([key, value], index) => {
-            return (
-              <WishListTableRow key={key}>
-                <WishListTableCell>{index + 1}</WishListTableCell>
-                <WishListTableCell>{value.name}</WishListTableCell>
-                <WishListTableCell>
-                  <button onClick={handleDelete(key)}>✖</button>
-                </WishListTableCell>
-              </WishListTableRow>
-            );
-          })}
+        <WishListTbody>
+          {wishList &&
+            Object.entries(wishList).map(([key, value]) => {
+              return (
+                <WishListTableRow key={key}>
+                  <WishListTableCell>{value.name}</WishListTableCell>
+                  <WishListTableCell>
+                    <WishListButtonDeleteGame onClick={handleDelete(key)}>
+                      ✖
+                    </WishListButtonDeleteGame>
+                  </WishListTableCell>
+                </WishListTableRow>
+              );
+            })}
+        </WishListTbody>
       </WishListTable>
-      {!Object.keys(wishList).length && <h3>Wish list is empty</h3>}
+      <WishListResultContainer>
+        {countGamesInWishList ? (
+          <>
+            <WishListResultTitle>{`Total price is ${
+              countGamesInWishList * _customPrice
+            }$`}</WishListResultTitle>
+            <WishListResultButton onClick={handleSubmit}>
+              {_wishListButtonSubmitValue}
+            </WishListResultButton>
+          </>
+        ) : (
+          <WishListResultTitle>{_wishListTitles.empty}</WishListResultTitle>
+        )}
+      </WishListResultContainer>
     </WishListContainer>
   );
 };

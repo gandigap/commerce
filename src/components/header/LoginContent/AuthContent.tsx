@@ -40,11 +40,11 @@ const AuthContent = () => {
     clearLocaleStorage();
   }, [dispatch, removeUser]);
 
-  const value = useContext(ModalContext);
+  const modalContext = useContext(ModalContext);
   const openWishList = useCallback(() => {
-    value.setTypeModal(_modalTypes.wishList);
-    value.setShowModal(!value.isModalOpen);
-  }, [value]);
+    modalContext.setTypeModal(_modalTypes.wishListModal);
+    modalContext.setShowModal(!modalContext.isModalOpen);
+  }, [modalContext]);
   return (
     <>
       <EmailInfo>{user.email}</EmailInfo>
