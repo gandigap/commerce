@@ -6,6 +6,7 @@ import styled from 'styled-components';
 const SectionTitleContainer = styled.div`
   margin: 10px 0;
 `;
+
 const Title = styled.h3`
   font-size: 36px;
   font-weight: bold;

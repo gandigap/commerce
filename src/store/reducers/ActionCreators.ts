@@ -1,3 +1,5 @@
+import React from 'react';
+import { useAppSelector } from 'hooks/redux-hooks';
 import axios from 'axios';
 import { IFetchData } from 'interfaces/dataInterfaces';
 import { IFetchGames, IGamePrimary } from 'interfaces/gameInterfaces';
@@ -6,21 +8,22 @@ import { dataSlice } from './DataSlice';
 import { gameSlice } from './GameSlice';
 import { searchSlice } from './SearchSlice';
 
-export const fetchGames = () => async (dispatch: AppDispatch) => {
-  try {
-    dispatch(gameSlice.actions.gamesFetching());
-    const response = await axios.get<IFetchGames>(`https://api.rawg.io/api/games?`, {
-      params: {
-        key: 'dc31c2a55aa444959f74eb7bc96b0617',
-        page: 1,
-        page_size: 30,
-      },
-    });
-    dispatch(gameSlice.actions.gamesFetchingSuccess(response.data.results));
-  } catch (e: any) {
-    dispatch(gameSlice.actions.gamesFetchingError(e.message));
-  }
-};
+export const fetchGames =
+  (pageNumber: number, pageSizeNumber: number) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(gameSlice.actions.gamesFetching());
+      const response = await axios.get<IFetchGames>(`https://api.rawg.io/api/games?`, {
+        params: {
+          key: 'dc31c2a55aa444959f74eb7bc96b0617',
+          page: pageNumber,
+          page_size: pageSizeNumber,
+        },
+      });
+      dispatch(gameSlice.actions.gamesFetchingSuccess(response.data.results));
+    } catch (e: any) {
+      dispatch(gameSlice.actions.gamesFetchingError(e.message));
+    }
+  };
 
 export const fetchGamesByParams =
   (category: string, value: string) => async (dispatch: AppDispatch) => {

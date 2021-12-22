@@ -8,6 +8,7 @@ import GameCard from './gamesCard.tsx/GameCard';
 import PageTitleContainer from 'components/sectionTitle/SectionTitle';
 
 import styled from 'styled-components';
+import Pagination from 'components/pagination/Pagination';
 
 const CardListContainer = styled.div`
   display: grid;
@@ -29,20 +30,22 @@ const CardListContainer = styled.div`
 
 const GameList = () => {
   const { games, isLoadingGames, errorFetchGames } = useAppSelector((state) => state.gameReducer);
+  const { pageSizeNumber, pageNumber } = useAppSelector((state) => state.pageReducer);
   const dispatch = useAppDispatch();
   const params = useParams();
   const path = useLocation().pathname;
 
   useEffect(() => {
-    console.log('games rerender');
+    console.log('game list');
     if (games.length === 0) {
       const pathParams = path.split('/');
       const category = pathParams[1];
       const value = pathParams[2];
-      params.slug ? dispatch(fetchGamesByParams(category, value)) : dispatch(fetchGames());
+      params.slug
+        ? dispatch(fetchGamesByParams(category, value))
+        : dispatch(fetchGames(pageNumber, pageSizeNumber));
     }
-    console.log(params, 'params');
-  }, [dispatch, games.length, params, path]);
+  }, [dispatch, games.length, pageNumber, pageSizeNumber, params.slug, path]);
 
   return (
     <>
@@ -54,6 +57,7 @@ const GameList = () => {
           <GameCard key={game.id} gameData={game} />
         ))}
       </CardListContainer>
+      <Pagination />
     </>
   );
 };
