@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
-import { useAppDispatch } from 'hooks/redux-hooks';
+import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks';
 import { fetchGamesByParams } from 'store/reducers/ActionCreators';
 import { IData } from 'interfaces/dataInterfaces';
 import DataCardPositions from './DataCardPositions';
@@ -70,9 +70,11 @@ const DataCard: React.FC<IProps> = ({ info }) => {
   const path = useLocation().pathname;
   const dispatch = useAppDispatch();
   const category = path.slice(1);
+  const { pageSizeNumber, pageNumber } = useAppSelector((state) => state.pageReducer);
+
   const handleClickTitle = useCallback(() => {
-    dispatch(fetchGamesByParams(category, info.slug));
-  }, [category, dispatch, info.slug]);
+    dispatch(fetchGamesByParams(category, info.slug, pageNumber, pageSizeNumber));
+  }, [category, dispatch, info.slug, pageNumber, pageSizeNumber]);
 
   return (
     <DataCardWrapper

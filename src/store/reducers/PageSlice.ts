@@ -3,12 +3,14 @@ interface IPageState {
   pageCategory: string;
   pageNumber: number;
   pageSizeNumber: number;
+  pagesPrevAndNext: (string|null)[]
 }
 
 const initialState: IPageState = {
   pageCategory: '',
   pageNumber: 1,
   pageSizeNumber: 10,
+  pagesPrevAndNext:[]
 };
 
 export const pageSlice = createSlice({
@@ -23,6 +25,9 @@ export const pageSlice = createSlice({
     },
     setPageSizeNumber(state, action: PayloadAction<number>) {
       state.pageSizeNumber = action.payload;
+    },
+    setPagesPrevAndNext(state, action: PayloadAction<(string|null)[]>) {
+      state.pagesPrevAndNext = action.payload;
     },
   },
 });

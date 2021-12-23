@@ -27,6 +27,8 @@ export interface IDataGameParentPlatforms {
 }
 
 export interface IFetchGames {
+  next:string | null;
+  previous:string | null;
   results: IGame[];
 }
 

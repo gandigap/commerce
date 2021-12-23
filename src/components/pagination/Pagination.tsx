@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks';
 import React, { useCallback, useEffect } from 'react';
-import { fetchGames } from 'store/reducers/ActionCreators';
+import { fetchDataByCategory, fetchGames } from 'store/reducers/ActionCreators';
 import { pageSlice } from 'store/reducers/PageSlice';
 
 import styled from 'styled-components';
@@ -21,8 +21,15 @@ const Button = styled.button`
   }
 `;
 
-const Pagination = () => {
-  const { pageSizeNumber, pageNumber } = useAppSelector((state) => state.pageReducer);
+type IProps = {
+  type: string;
+  path?: string;
+};
+
+const Pagination: React.FC<IProps> = ({ type, path }) => {
+  const { pageSizeNumber, pageNumber, pagesPrevAndNext } = useAppSelector(
+    (state) => state.pageReducer,
+  );
   const dispatch = useAppDispatch();
   const handleChangePageSize = useCallback(
     (e) => {
@@ -42,13 +49,19 @@ const Pagination = () => {
   );
 
   useEffect(() => {
-    dispatch(fetchGames(pageNumber, pageSizeNumber));
-  }, [dispatch, pageNumber, pageSizeNumber]);
+    type === 'games'
+      ? dispatch(fetchGames(pageNumber, pageSizeNumber))
+      : path && dispatch(fetchDataByCategory(path.slice(1), pageNumber, pageSizeNumber));
+  }, [dispatch, pageNumber, pageSizeNumber, path, type]);
 
   const sizing = ['10', '20', '30'];
+  console.log(pagesPrevAndNext[0], 'ssssss');
   return (
     <PaginationContainer>
-      <Button onClick={handleChangePage} data-value={'prev'}>
+      <Button
+        onClick={handleChangePage}
+        data-value={'prev'}
+        className={pagesPrevAndNext[0] ? '' : 'disablePaginationButton'}>
         prev
       </Button>
       <select value={pageSizeNumber} onChange={handleChangePageSize}>
@@ -58,7 +71,10 @@ const Pagination = () => {
           </option>
         ))}
       </select>
-      <Button onClick={handleChangePage} data-value={'next'}>
+      <Button
+        onClick={handleChangePage}
+        data-value={'next'}
+        className={pagesPrevAndNext[0] ? '' : 'disablePaginationButton'}>
         next
       </Button>
     </PaginationContainer>

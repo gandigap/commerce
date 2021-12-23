@@ -8,6 +8,7 @@ import { IData } from 'interfaces/dataInterfaces';
 import DataCard from './dataCard/DataCard';
 
 import styled from 'styled-components';
+import Pagination from 'components/pagination/Pagination';
 
 const DataListContainer = styled.div`
   display: grid;
@@ -47,6 +48,7 @@ const DataList = () => {
           <DataCard key={dataInfo.id} info={dataInfo} />
         ))}
       </DataListContainer>
+      <Pagination type={`data`} path={path} />
     </>
   );
 };

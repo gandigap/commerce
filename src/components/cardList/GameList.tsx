@@ -42,7 +42,7 @@ const GameList = () => {
       const category = pathParams[1];
       const value = pathParams[2];
       params.slug
-        ? dispatch(fetchGamesByParams(category, value))
+        ? dispatch(fetchGamesByParams(category, value, pageNumber, pageSizeNumber))
         : dispatch(fetchGames(pageNumber, pageSizeNumber));
     }
   }, [dispatch, games.length, pageNumber, pageSizeNumber, params.slug, path]);
@@ -57,7 +57,7 @@ const GameList = () => {
           <GameCard key={game.id} gameData={game} />
         ))}
       </CardListContainer>
-      <Pagination />
+      <Pagination type={`games`} />
     </>
   );
 };
