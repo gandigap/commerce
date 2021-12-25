@@ -30,9 +30,11 @@ export const _localeStorageItems = ['email', 'refreshToken', 'uid'];
 
 export const _customPrice = 5;
 
-export const _wishListTitles ={
-  main:'WishList',
-  empty:'WishList',
-}
+export const _wishListTitles = {
+  main: 'WishList',
+  empty: 'WishList',
+};
 
-export const _wishListButtonSubmitValue = 'Submit'
+export const _wishListButtonSubmitValue = 'Submit';
+
+export const _sizePagination = ['10', '20', '30'];
