@@ -33,3 +33,17 @@ export const buttonFormAndCard = () => {
   }
   `;
 };
+
+export const headerAndFormLink = () => {
+  return `
+    position: relative;
+    color: var(--color-5);
+    text-decoration: none;   
+  `;
+};
+
+export const headerAndFormLinkHover = () => {
+  return `
+    color: var(--color-4);
+  `;
+};

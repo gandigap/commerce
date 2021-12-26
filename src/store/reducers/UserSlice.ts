@@ -1,25 +1,50 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IUser } from 'interfaces/userInterfaces';
+import { IGame } from 'interfaces/gameInterfaces';
 
-const initialState: IUser = {
-  email: '',
-  token: '',
-  id: '',
+interface IUserState {
+  user: IUser;
+  wishList: { [key: string]: IGame };
+  isLoading: boolean;
+  error: string;
+}
+
+const initialState: IUserState = {
+  user: { email: '', token: '', id: '' },
+  wishList: {},
+  isLoading: false,
+  error: '',
 };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser(state, action: PayloadAction<IUser>) {
-      state.email = action.payload.email;
-      state.token = action.payload.token;
-      state.id = action.payload.id;
+    userFetching(state, action: PayloadAction<IUser>) {
+      state.isLoading = true;
+    },
+    userFetchingSuccess(state, action: PayloadAction<IUser>) {
+      state.isLoading = false;
+      state.error = '';
+      state.user = action.payload;
+    },
+    userFetchingError(state, action: PayloadAction<string>) {
+      state.isLoading = false;
+      state.error = action.payload;
     },
     removeUser(state) {
-      state.email = '';
-      state.token = '';
-      state.id = '';
+      state.user.email = '';
+      state.user.token = '';
+      state.user.id = '';
+    },
+    addGameToWishList(state, action: PayloadAction<IGame>) {
+      state.wishList[action.payload.slug] = action.payload;
+    },
+    deleteGameFromWishList(state, action: PayloadAction<string>) {
+      delete state.wishList[action.payload];
+    },
+    clearWishList(state, action: PayloadAction<void>) {
+      state.wishList = {};
     },
   },
 });

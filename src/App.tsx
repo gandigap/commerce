@@ -1,22 +1,28 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import ContentLayout from 'pages/MainPage';
-import GameLayout from 'components/GameList/GameLayout';
-import GameList from 'components/GameList/GameList';
-import PlatformList from 'components/GameList/PlatformList';
-import Other from 'components/GameList/Other';
+import GameList from 'components/cardList/GameList';
+import Game from 'components/cardList/game/Game';
+import Other from 'components/cardList/Other';
 import AuthPage from 'pages/AuthPage';
 import ModalContext from 'components/modal/ModalContext';
 import Modal from 'components/modal/Modal';
 import ModalOverlay from 'components/modal/ModalOverlay';
-import { _authPageTypes, _modalTypes } from 'constants/constants';
+import { _authPageTypes, _listNavTitles, _modalTypes } from 'constants/constants';
 
 import './styles/_global.scss';
+import { useAppDispatch } from 'hooks/redux-hooks';
+import { userSlice } from 'store/reducers/UserSlice';
+import DataList from 'components/cardList/DataList';
+import WishList from 'components/wishList/WishList';
 
 function App() {
   const [isModalOpen, setShowModal] = useState(false);
   const [typeModal, setTypeModal] = useState('register_form');
+  const dispatch = useAppDispatch();
+  const { userFetchingSuccess } = userSlice.actions;
+
   const valueModalContext = {
     isModalOpen,
     setShowModal,
@@ -31,14 +37,19 @@ function App() {
     [isModalOpen],
   );
 
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    user && dispatch(userFetchingSuccess(JSON.parse(user)));
+  }, [dispatch, userFetchingSuccess]);
+
   const changeContentModal = useCallback(() => {
     switch (valueModalContext.typeModal) {
-      case _modalTypes.updateUserInfo:
-        return <p>B</p>;
-      case _modalTypes.updateGameInfo:
-        return <p>A</p>;
+      case _modalTypes.wishListModal:
+        return <WishList />;
+      case _modalTypes.successModal:
+        return <p>Success</p>;
       default:
-        return <p>C</p>;
+        return <WishList />;
     }
   }, [valueModalContext.typeModal]);
 
@@ -50,12 +61,21 @@ function App() {
       <Routes>
         <Route path="/" element={<ContentLayout />}>
           <Route index element={<GameList />} />
-          <Route path="platforms" element={<PlatformList />} />
+          <Route path="games/:slug" element={<Game />} />
           <Route path="stores" element={<Other />} />
+          {_listNavTitles.map((path, index) => (
+            <Route path={path.toLowerCase()} element={<DataList />} key={`${path}_path`} />
+          ))}
+          {_listNavTitles.map((path, index) => (
+            <Route
+              path={`${path.toLowerCase()}/:slug`}
+              element={<GameList />}
+              key={`${path}_path_slug`}
+            />
+          ))}
         </Route>
-        <Route path="login" element={<AuthPage type={_authPageTypes.login} />} />
-        <Route path="register" element={<AuthPage type={_authPageTypes.register} />} />
-        <Route path="games/:id" element={<GameLayout />} />
+        <Route path="login" element={<AuthPage type={_authPageTypes.log} />} />
+        <Route path="register" element={<AuthPage type={_authPageTypes.reg} />} />
         <Route path="*" element={<p>Not found page</p>} />
       </Routes>
     </ModalContext.Provider>

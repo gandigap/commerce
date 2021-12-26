@@ -1,11 +1,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+
 import Form from './Form';
 import { useAppDispatch } from 'hooks/redux-hooks';
 import { userSlice } from 'store/reducers/UserSlice';
 
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-import { _authPageTypes } from 'constants/constants';
+import { _authPageTitles, _authPageTypes, _errorMessages } from 'constants/constants';
+
+const setLocaleStorage = (userInfo: any) => {
+  localStorage.setItem('user', JSON.stringify(userInfo));
+};
 
 interface IAuthForm {
   typeForm: string;
@@ -14,33 +19,40 @@ interface IAuthForm {
 const AuthForm: React.FC<IAuthForm> = ({ typeForm }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { setUser } = userSlice.actions;
+  const { userFetchingSuccess, userFetchingError } = userSlice.actions;
 
   const handleLogin = (email: string, password: string) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        dispatch(setUser({ email: user.email, token: user.refreshToken, id: user.uid }));
+        const data = { email: user.email, token: user.refreshToken, id: user.uid };
+        dispatch(userFetchingSuccess(data));
+        setLocaleStorage(data);
         navigate('/');
       })
-      .catch(console.error);
+      .catch((error) => {
+        dispatch(userFetchingError(_errorMessages.userWrong));
+      });
   };
 
   const handleRegister = (email: string, password: string) => {
     const auth = getAuth();
-    console.log(auth, 'auth');
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        dispatch(setUser({ email: user.email, token: user.refreshToken, id: user.uid }));
+        const data = { email: user.email, token: user.refreshToken, id: user.uid };
+        dispatch(userFetchingSuccess(data));
+        setLocaleStorage(data);
         navigate('/');
       })
-      .catch(console.error);
+      .catch((error) => {
+        dispatch(userFetchingError(_errorMessages.emailInUse));
+      });
   };
 
-  return typeForm === _authPageTypes.login ? (
-    <Form title="sign in" handleClick={handleLogin} />
+  return typeForm === _authPageTypes.log ? (
+    <Form title={_authPageTitles.log} handleClick={handleLogin} />
   ) : (
-    <Form title="register" handleClick={handleRegister} />
+    <Form title={_authPageTitles.reg} handleClick={handleRegister} />
   );
 };
 

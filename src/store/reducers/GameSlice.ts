@@ -5,8 +5,7 @@ interface GameState {
   games: IGame[];
   isLoading: boolean;
   error: string;
-  downloadGames: { [key: number]: IGamePrimary };
-  currentGameId: number;
+  downloadGames: { [key: string]: IGamePrimary };
 }
 
 const initialState: GameState = {
@@ -14,7 +13,6 @@ const initialState: GameState = {
   isLoading: false,
   error: '',
   downloadGames: {},
-  currentGameId: 0,
 };
 
 export const gameSlice = createSlice({
@@ -33,16 +31,10 @@ export const gameSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    gameFetching(state) {
-      state.isLoading = true;
-    },
     gameFetchingSuccess(state, action: PayloadAction<IGamePrimary>) {
       state.isLoading = false;
       state.error = '';
-      state.downloadGames[state.currentGameId] = action.payload;
-    },
-    setCurrentGameId(state, action: PayloadAction<number>) {
-      state.currentGameId = action.payload;
+      state.downloadGames[action.payload.slug] = action.payload;
     },
   },
 });

@@ -1,9 +1,8 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-import Header from 'components/Header/Header';
-import SectionTitle from 'components/SectionTitle/SectionTitle';
-import Sidebar from 'components/Sidebar/Sidebar';
+import Header from 'components/header/Header';
+import Sidebar from 'components/navigation/Navigation';
 
 import styled from 'styled-components';
 
@@ -23,7 +22,6 @@ const MainPage = () => {
       <MainContainer>
         <Sidebar />
         <SectionContainer>
-          <SectionTitle />
           <Outlet />
         </SectionContainer>
       </MainContainer>
