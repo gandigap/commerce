@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks';
 import { useParams } from 'react-router-dom';
-
 import { fetchGame } from 'store/reducers/ActionCreators';
+import GameAside from './GameAside';
+import Spinner from 'components/spinner/Spinner';
 
 import styled from 'styled-components';
-import GameAside from './GameAside';
 
 const GameContainer = styled.div`
   display: flex;
@@ -43,7 +43,7 @@ const GameImage = styled.img`
 `;
 
 const Game = () => {
-  const { downloadGames } = useAppSelector((state) => state.gameReducer);
+  const { downloadGames, isLoading, error } = useAppSelector((state) => state.gameReducer);
   const dispatch = useAppDispatch();
   const { slug } = useParams();
 
@@ -54,6 +54,14 @@ const Game = () => {
       }
     }
   }, [dispatch, downloadGames, slug]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    return <h3>{error}</h3>;
+  }
 
   return (
     <>

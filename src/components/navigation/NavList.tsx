@@ -1,16 +1,16 @@
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
+import { _listNavTitles } from 'constants/constants';
+import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks';
+import { fetchDataByCategory } from 'store/reducers/ActionCreators';
+import { pageSlice } from 'store/reducers/PageSlice';
+
 import { faProjectDiagram, faDatabase, faUsers, faDice } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import styled from 'styled-components';
 import { headerAndFormLink } from 'styles/mixins';
-
-import { _listNavTitles } from 'constants/constants';
-import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks';
-import { fetchDataByCategory } from 'store/reducers/ActionCreators';
-import { pageSlice } from 'store/reducers/PageSlice';
 
 const NavListContainer = styled.ul`
   margin: 20px 0;
@@ -54,15 +54,17 @@ const _listNavIcons = [faProjectDiagram, faDatabase, faUsers, faDice];
 
 const NavList = () => {
   const { pageNumber, pageSizeNumber } = useAppSelector((state) => state.pageReducer);
-  const { setPageCategory } = pageSlice.actions;
+  const { setPageCategory, setPageNumber } = pageSlice.actions;
   const dispatch = useAppDispatch();
 
   const handlerClick = useCallback(
     (category: string) => () => {
+      const _numberFirstPage = 1;
+      dispatch(setPageNumber(_numberFirstPage));
       dispatch(setPageCategory(category));
       dispatch(fetchDataByCategory(category, pageNumber, pageSizeNumber));
     },
-    [dispatch, pageNumber, pageSizeNumber, setPageCategory],
+    [dispatch, pageNumber, pageSizeNumber, setPageCategory, setPageNumber],
   );
 
   return (

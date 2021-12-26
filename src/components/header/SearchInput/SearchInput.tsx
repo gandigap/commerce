@@ -4,10 +4,10 @@ import SearchIcon from 'images/search.svg';
 import { useAppDispatch } from 'hooks/redux-hooks';
 import { fetchSearchGame } from 'store/reducers/ActionCreators';
 import useDebounce from 'hooks/debounce';
-
-import styled from 'styled-components';
 import SearchList from './SearchList';
 import { searchSlice } from 'store/reducers/SearchSlice';
+
+import styled from 'styled-components';
 
 const SearchInputContainer = styled.div`
   position: relative;
@@ -29,6 +29,8 @@ const Input = styled.input`
   background: url('${SearchIcon}') no-repeat scroll 16px;
   background-size: 14px;
   background-color: hsla(0, 0%, 100%, 0.16);
+  font-size: 16px;
+  font-weight: bold;
 
   &:focus {
     outline: none;
@@ -37,7 +39,7 @@ const Input = styled.input`
 
 const SearchInput = () => {
   const [displayListMode, setDisplayListMode] = useState(false);
-
+  const { clearSearchList } = searchSlice.actions;
   const dispatch = useAppDispatch();
 
   const searchQuery = (query: string) => {
@@ -46,7 +48,7 @@ const SearchInput = () => {
 
   const changeDisplay = () => {
     setDisplayListMode(!displayListMode);
-    !displayListMode && dispatch(searchSlice.actions.clearSearchList());
+    !displayListMode && dispatch(clearSearchList());
   };
 
   const debounceSearch = useDebounce(searchQuery, 500);

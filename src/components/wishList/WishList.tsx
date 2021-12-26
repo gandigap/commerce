@@ -24,20 +24,21 @@ import ModalContext from 'components/modal/ModalContext';
 
 const WishList: React.FC = () => {
   const { wishList } = useAppSelector((state) => state.userReducer);
+  const { deleteGameFromWishList, clearWishList } = userSlice.actions;
   const dispatch = useAppDispatch();
   const handleDelete = useCallback(
     (slug) => () => {
-      dispatch(userSlice.actions.deleteGameFromWishList(slug));
+      dispatch(deleteGameFromWishList(slug));
     },
-    [dispatch],
+    [deleteGameFromWishList, dispatch],
   );
 
   const modalContext = useContext(ModalContext);
   const handleSubmit = useCallback(() => {
-    dispatch(userSlice.actions.clearWishList());
+    dispatch(clearWishList());
     modalContext.setTypeModal(_modalTypes.successModal);
     setTimeout(() => modalContext.setShowModal(!modalContext.isModalOpen), 3000);
-  }, [dispatch, modalContext]);
+  }, [clearWishList, dispatch, modalContext]);
 
   const countGamesInWishList = Object.keys(wishList).length;
   return (

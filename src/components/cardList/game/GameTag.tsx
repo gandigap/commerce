@@ -1,6 +1,6 @@
-import { IData } from 'interfaces/dataInterfaces';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { IData } from 'interfaces/dataInterfaces';
 
 import styled from 'styled-components';
 
