@@ -37,7 +37,6 @@ const WishList: React.FC = () => {
   const handleSubmit = useCallback(() => {
     dispatch(clearWishList());
     modalContext.setTypeModal(_modalTypes.successModal);
-    setTimeout(() => modalContext.setShowModal(!modalContext.isModalOpen), 3000);
   }, [clearWishList, dispatch, modalContext]);
 
   const countGamesInWishList = Object.keys(wishList).length;
