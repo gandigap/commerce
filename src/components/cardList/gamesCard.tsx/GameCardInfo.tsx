@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { useAppDispatch } from 'hooks/redux-hooks';
 import { fetchGame } from 'store/reducers/ActionCreators';
+import { IDataGameParentPlatforms, IGameCardProps } from 'interfaces/gameInterfaces';
 
 import { faMobile, faGamepad } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -16,9 +17,6 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import styled from 'styled-components';
-
-import { IDataGameParentPlatforms, IGameCardProps } from 'interfaces/gameInterfaces';
-
 const GameCardInfoContainer = styled.div`
   padding: 5px;
 

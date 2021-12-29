@@ -6,9 +6,10 @@ import { fetchDataByCategory } from 'store/reducers/ActionCreators';
 import PageTitleContainer from 'components/sectionTitle/SectionTitle';
 import { IData } from 'interfaces/dataInterfaces';
 import DataCard from './dataCard/DataCard';
+import Pagination from 'components/pagination/Pagination';
+import Spinner from 'components/spinner/Spinner';
 
 import styled from 'styled-components';
-import Pagination from 'components/pagination/Pagination';
 
 const DataListContainer = styled.div`
   display: grid;
@@ -35,15 +36,21 @@ const DataList = () => {
   const path = useLocation().pathname;
 
   useEffect(() => {
-    data.length === 0 && dispatch(fetchDataByCategory(path.slice(1), pageNumber, pageSizeNumber));
-  }, [data.length, dispatch, pageNumber, pageSizeNumber, path]);
-  console.log(path.slice(1), 'slice');
+    dispatch(fetchDataByCategory(path.slice(1), pageNumber, pageSizeNumber));
+  }, [dispatch, pageNumber, pageSizeNumber, path]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    return <h3>{error}</h3>;
+  }
+
   return (
     <>
       <PageTitleContainer />
       <DataListContainer>
-        {isLoading && <h3>Идет загрузка</h3>}
-        {error && <h3>{error}</h3>}
         {data.map((dataInfo: IData) => (
           <DataCard key={dataInfo.id} info={dataInfo} />
         ))}

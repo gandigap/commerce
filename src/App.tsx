@@ -16,6 +16,7 @@ import { useAppDispatch } from 'hooks/redux-hooks';
 import { userSlice } from 'store/reducers/UserSlice';
 import DataList from 'components/cardList/DataList';
 import WishList from 'components/wishList/WishList';
+import SuccessWindow from 'components/successWindow/SuccessWindow';
 
 function App() {
   const [isModalOpen, setShowModal] = useState(false);
@@ -47,7 +48,7 @@ function App() {
       case _modalTypes.wishListModal:
         return <WishList />;
       case _modalTypes.successModal:
-        return <p>Success</p>;
+        return <SuccessWindow />;
       default:
         return <WishList />;
     }

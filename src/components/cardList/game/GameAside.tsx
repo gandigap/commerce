@@ -34,7 +34,6 @@ interface IGameAside {
 }
 
 const GameAside: React.FC<IGameAside> = ({ title, tags, publishers, developers, stores }) => {
-  console.log(stores);
   return (
     <GameAsideContainer>
       <GameAsideTitle>{title.toUpperCase()}</GameAsideTitle>

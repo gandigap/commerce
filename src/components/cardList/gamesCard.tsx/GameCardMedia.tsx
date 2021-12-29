@@ -1,6 +1,5 @@
-import { IGame } from 'interfaces/gameInterfaces';
 import React from 'react';
-
+import { IGame } from 'interfaces/gameInterfaces';
 import AwesomeSlider from 'react-awesome-slider';
 
 import styled from 'styled-components';

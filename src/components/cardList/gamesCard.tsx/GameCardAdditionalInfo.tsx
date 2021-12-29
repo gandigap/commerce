@@ -5,10 +5,10 @@ import { faGift } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IGameCardProps } from 'interfaces/gameInterfaces';
 import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks';
+import { userSlice } from 'store/reducers/UserSlice';
 
 import { buttonFormAndCard } from 'styles/mixins';
 import styled from 'styled-components';
-import { userSlice } from 'store/reducers/UserSlice';
 
 const GameCardAdditionalInfoContainer = styled.div`
   display: flex;
@@ -74,10 +74,12 @@ const _textPayButton = 'Add';
 
 const GameCardAdditionalInfo: React.FC<IGameCardProps> = ({ gameData }) => {
   const { wishList } = useAppSelector((state) => state.userReducer);
+  const { addGameToWishList } = userSlice.actions;
   const dispatch = useAppDispatch();
+
   const handleWishButton = useCallback(() => {
-    dispatch(userSlice.actions.addGameToWishList({ ...gameData }));
-  }, [dispatch, gameData]);
+    dispatch(addGameToWishList({ ...gameData }));
+  }, [addGameToWishList, dispatch, gameData]);
 
   const genres = gameData.genres.map((genre: any) => {
     return (

@@ -32,7 +32,7 @@ const ThemeSwitcher = () => {
       document.documentElement.setAttribute('data-theme', 'dark');
     }
   }, []);
-  console.log('input');
+
   return (
     <ThemeSwitcherContainer>
       <ThemeSwitcherLabel className="switch" htmlFor="checkbox">

@@ -6,9 +6,10 @@ import { fetchGames, fetchGamesByParams } from 'store/reducers/ActionCreators';
 import { IGame } from 'interfaces/gameInterfaces';
 import GameCard from './gamesCard.tsx/GameCard';
 import PageTitleContainer from 'components/sectionTitle/SectionTitle';
+import Pagination from 'components/pagination/Pagination';
+import Spinner from 'components/spinner/Spinner';
 
 import styled from 'styled-components';
-import Pagination from 'components/pagination/Pagination';
 
 const CardListContainer = styled.div`
   display: grid;
@@ -29,30 +30,33 @@ const CardListContainer = styled.div`
 `;
 
 const GameList = () => {
-  const { games, isLoadingGames, errorFetchGames } = useAppSelector((state) => state.gameReducer);
+  const { games, isLoading, error } = useAppSelector((state) => state.gameReducer);
   const { pageSizeNumber, pageNumber } = useAppSelector((state) => state.pageReducer);
   const dispatch = useAppDispatch();
   const params = useParams();
   const path = useLocation().pathname;
 
   useEffect(() => {
-    console.log('game list');
-    if (games.length === 0) {
-      const pathParams = path.split('/');
-      const category = pathParams[1];
-      const value = pathParams[2];
-      params.slug
-        ? dispatch(fetchGamesByParams(category, value, pageNumber, pageSizeNumber))
-        : dispatch(fetchGames(pageNumber, pageSizeNumber));
-    }
+    const pathParams = path.split('/');
+    const category = pathParams[1];
+    const value = pathParams[2];
+    params.slug
+      ? dispatch(fetchGamesByParams(category, value, pageNumber, pageSizeNumber))
+      : dispatch(fetchGames(pageNumber, pageSizeNumber));
   }, [dispatch, games.length, pageNumber, pageSizeNumber, params.slug, path]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    return <h3>{error}</h3>;
+  }
 
   return (
     <>
       <PageTitleContainer />
       <CardListContainer>
-        {isLoadingGames && <h3>Идет загрузка</h3>}
-        {errorFetchGames && <h3>{errorFetchGames}</h3>}
         {games.map((game: IGame) => (
           <GameCard key={game.id} gameData={game} />
         ))}

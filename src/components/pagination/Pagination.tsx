@@ -1,12 +1,12 @@
+import React, { useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks';
-import React, { useCallback, useEffect } from 'react';
-import { fetchDataByCategory, fetchGames } from 'store/reducers/ActionCreators';
 import { pageSlice } from 'store/reducers/PageSlice';
+import { _sizePagination } from 'constants/constants';
+
 import ArrowLeft from 'images/arrowLeft.png';
 import ArrowRight from 'images/arrowRight.png';
 
 import styled from 'styled-components';
-import { _sizePagination } from 'constants/constants';
 
 const PaginationContainer = styled.div`
   display: flex;
@@ -50,13 +50,15 @@ const Pagination: React.FC<IProps> = ({ type, path }) => {
   const { pageSizeNumber, pageNumber, pagesPrevAndNext } = useAppSelector(
     (state) => state.pageReducer,
   );
+  const { setPageSizeNumber, setPageNumber } = pageSlice.actions;
   const dispatch = useAppDispatch();
+
   const handleChangePageSize = useCallback(
     (e) => {
       const value = parseInt(e.target.value);
-      dispatch(pageSlice.actions.setPageSizeNumber(value));
+      dispatch(setPageSizeNumber(value));
     },
-    [dispatch],
+    [dispatch, setPageSizeNumber],
   );
 
   const handleChangePage = useCallback(
@@ -64,19 +66,12 @@ const Pagination: React.FC<IProps> = ({ type, path }) => {
       if (!e.target.getAttribute('class').includes('disablePaginationButton')) {
         const value = e.target.getAttribute('data-value');
         const number = value === 'prev' ? pageNumber - 1 : pageNumber + 1;
-        dispatch(pageSlice.actions.setPageNumber(number));
+        dispatch(setPageNumber(number));
       }
     },
-    [dispatch, pageNumber],
+    [dispatch, pageNumber, setPageNumber],
   );
 
-  useEffect(() => {
-    type === 'games'
-      ? dispatch(fetchGames(pageNumber, pageSizeNumber))
-      : path && dispatch(fetchDataByCategory(path.slice(1), pageNumber, pageSizeNumber));
-  }, [dispatch, pageNumber, pageSizeNumber, path, type]);
-
-  console.log(pagesPrevAndNext[0], 'ssssss');
   return (
     <PaginationContainer>
       <PaginationButton
@@ -85,7 +80,6 @@ const Pagination: React.FC<IProps> = ({ type, path }) => {
         style={{ background: `url('${ArrowLeft}'),var(--color-3)` }}
         className={pagesPrevAndNext[0] ? '' : 'disablePaginationButton'}
       />
-
       <PaginationSelect value={pageSizeNumber} onChange={handleChangePageSize}>
         {_sizePagination.map((size) => (
           <option value={size} key={size}>

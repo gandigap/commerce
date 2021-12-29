@@ -41,6 +41,7 @@ export const fetchGamesByParams =
         },
       );
       dispatch(gameSlice.actions.gamesFetchingSuccess(response.data.results));
+      dispatch(pageSlice.actions.setPagesPrevAndNext([response.data.previous, response.data.next]));
     } catch (e: any) {
       dispatch(gameSlice.actions.gamesFetchingError(e.message));
     }
@@ -59,6 +60,7 @@ export const fetchDataByCategory =
         },
       });
       dispatch(dataSlice.actions.dataFetchingSuccess(response.data.results));
+      dispatch(pageSlice.actions.setPagesPrevAndNext([response.data.previous, response.data.next]));
     } catch (e: any) {
       dispatch(dataSlice.actions.dataFetchingError(e.message));
     }

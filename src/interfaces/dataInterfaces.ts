@@ -11,6 +11,8 @@ export interface IData {
 }
 
 export interface IFetchData {
+  next: string | null;
+  previous: string | null;
   results: IData[];
 }
 
