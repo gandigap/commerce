@@ -14,6 +14,11 @@ import { pageSlice } from 'store/reducers/PageSlice';
 
 const NavListContainer = styled.ul`
   margin: 20px 0;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-wrap-wrap;
+  }
 `;
 
 const NavListItem = styled.li`

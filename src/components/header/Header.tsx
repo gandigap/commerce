@@ -13,6 +13,12 @@ import { headerAndFormLink, headerAndFormLinkHover } from 'styles/mixins';
 const HeaderContainer = styled.header`
   margin: 20px;
   display: flex;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 `;
 
 const AuthHeaderContainer = styled.div`
@@ -20,6 +26,11 @@ const AuthHeaderContainer = styled.div`
   align-items: center;
   flex-grow: 1;
   justify-content: flex-end;
+
+  @media (max-width: 768px) {
+    order: -1;
+    flex-grow: 0;
+  }
 
   & a {
     margin: 0 10px;

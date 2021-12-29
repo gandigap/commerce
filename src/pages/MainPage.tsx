@@ -9,6 +9,10 @@ import styled from 'styled-components';
 const MainContainer = styled.main`
   display: flex;
   margin: 0 40px;
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+  }
 `;
 
 const SectionContainer = styled.section`

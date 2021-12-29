@@ -12,8 +12,10 @@ import { searchSlice } from 'store/reducers/SearchSlice';
 const SearchInputContainer = styled.div`
   position: relative;
   width: 500px;
-  display: flex;
+  height: 50px;
   margin: 0 50px;
+  display: flex;
+  border-radius: 23px;
   background-color: var(--color-3);
 
   @media (max-width: 992px) {
