@@ -11,7 +11,7 @@ import { buttonFormAndCard } from 'styles/mixins';
 import styled from 'styled-components';
 
 const GameCardAdditionalInfoContainer = styled.div`
-  display: flex;
+  display: none;
   flex-direction: column;
   flex-shrink: 1;
   flex-grow: 1;
