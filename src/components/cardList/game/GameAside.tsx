@@ -1,11 +1,9 @@
 import React from 'react';
 
-import GameDeveloper from './GameDeveloper';
-import GameStores from './GameStores';
-import GameTag from './GameTag';
 import { IData } from 'interfaces/dataInterfaces';
 
 import styled from 'styled-components';
+import GameAsideItem from './GameAsideItem';
 
 const GameAsideContainer = styled.aside`
   min-width: 300px;
@@ -23,6 +21,38 @@ const GameAsideContent = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
+
+  .gameAside__tags {
+    padding: 3px;
+    border-radius: 10px;
+    background-color: var(--color-4);
+    color: var(--color-1);
+
+    &:hover {
+      color: var(--color-5);
+      background-color: var(--color-3);
+    }
+  }
+
+  .gameAside__stores {
+    padding: 5px;
+    border: 1px solid var(--color-5);
+    color: var(--color-5);
+    background-color: var(--color-1);
+
+    &:hover {
+      color: var(--color-4);
+    }
+  }
+
+  .gameAside__developers {
+    text-decoration: underline;
+    color: var(--color-5);
+
+    &:hover {
+      color: var(--color-4);
+    }
+  }
 `;
 
 interface IGameAside {
@@ -40,15 +70,15 @@ const GameAside: React.FC<IGameAside> = ({ title, tags, publishers, developers, 
       <GameAsideContent>
         {tags &&
           tags.map((tag) => {
-            return <GameTag key={tag.name} tagInfo={tag} />;
+            return <GameAsideItem key={tag.name} info={tag} category={title} />;
           })}
         {developers &&
           developers.map((developer) => {
-            return <GameDeveloper key={developer.name} developerInfo={developer} />;
+            return <GameAsideItem key={developer.name} info={developer} category={title} />;
           })}
         {stores &&
           stores.map((store) => {
-            return <GameStores key={store.id} storeInfo={store.store} />;
+            return <GameAsideItem key={store.id} info={store.store} category={title} />;
           })}
       </GameAsideContent>
     </GameAsideContainer>

@@ -4,12 +4,11 @@ import { Route, Routes } from 'react-router-dom';
 import ContentLayout from 'pages/MainPage';
 import GameList from 'components/cardList/GameList';
 import Game from 'components/cardList/game/Game';
-import Other from 'components/cardList/Other';
 import AuthPage from 'pages/AuthPage';
 import ModalContext from 'components/modal/ModalContext';
 import Modal from 'components/modal/Modal';
 import ModalOverlay from 'components/modal/ModalOverlay';
-import { _authPageTypes, _listNavTitles, _modalTypes } from 'constants/constants';
+import { _authPageTypes, _listNavTitles, _modalTypes, _listAsideTitles } from 'constants/constants';
 
 import './styles/_global.scss';
 import { useAppDispatch } from 'hooks/redux-hooks';
@@ -63,17 +62,17 @@ function App() {
         <Route path="/" element={<ContentLayout />}>
           <Route index element={<GameList />} />
           <Route path="games/:slug" element={<Game />} />
-          <Route path="stores" element={<Other />} />
-          {_listNavTitles.map((path, index) => (
+          {Object.values(_listNavTitles).map((path, index) => (
             <Route path={path.toLowerCase()} element={<DataList />} key={`${path}_path`} />
           ))}
-          {_listNavTitles.map((path, index) => (
+          {Object.values({ ..._listNavTitles, ..._listAsideTitles }).map((path, index) => (
             <Route
               path={`${path.toLowerCase()}/:slug`}
               element={<GameList />}
               key={`${path}_path_slug`}
             />
           ))}
+          <Route path={`genres/:slug`} element={<GameList />} />
         </Route>
         <Route path="login" element={<AuthPage type={_authPageTypes.log} />} />
         <Route path="register" element={<AuthPage type={_authPageTypes.reg} />} />

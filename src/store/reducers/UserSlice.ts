@@ -40,8 +40,8 @@ export const userSlice = createSlice({
     addGameToWishList(state, action: PayloadAction<IGame>) {
       state.wishList[action.payload.slug] = action.payload;
     },
-    deleteGameFromWishList(state, action: PayloadAction<string>) {
-      delete state.wishList[action.payload];
+    deleteGameFromWishList(state, action: PayloadAction<IGame>) {
+      delete state.wishList[action.payload.slug];
     },
     clearWishList(state, action: PayloadAction<void>) {
       state.wishList = {};

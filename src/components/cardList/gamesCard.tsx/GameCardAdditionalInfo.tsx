@@ -11,7 +11,7 @@ import { buttonFormAndCard } from 'styles/mixins';
 import styled from 'styled-components';
 
 const GameCardAdditionalInfoContainer = styled.div`
-  display: flex;
+  display: none;
   flex-direction: column;
   flex-shrink: 1;
   flex-grow: 1;
@@ -74,12 +74,14 @@ const _textPayButton = 'Add';
 
 const GameCardAdditionalInfo: React.FC<IGameCardProps> = ({ gameData }) => {
   const { wishList } = useAppSelector((state) => state.userReducer);
-  const { addGameToWishList } = userSlice.actions;
+  const { addGameToWishList, deleteGameFromWishList } = userSlice.actions;
   const dispatch = useAppDispatch();
 
   const handleWishButton = useCallback(() => {
-    dispatch(addGameToWishList({ ...gameData }));
-  }, [addGameToWishList, dispatch, gameData]);
+    !wishList.hasOwnProperty(gameData.slug)
+      ? dispatch(addGameToWishList({ ...gameData }))
+      : dispatch(deleteGameFromWishList({ ...gameData }));
+  }, [addGameToWishList, deleteGameFromWishList, dispatch, gameData, wishList]);
 
   const genres = gameData.genres.map((genre: any) => {
     return (

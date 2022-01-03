@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { IGameCardProps } from 'interfaces/gameInterfaces';
 import GameCardAdditionalInfo from './GameCardAdditionalInfo';
@@ -13,9 +13,9 @@ const GameCardWrapper = styled.div`
     transition: all 0.3s;
     transform: scale(1.02);
     position: relative;
-    z-index: 1;
+    z-index: 3;
 
-    .card-open {
+    & > div {
       width: 100%;
       position: absolute;
       left: 0;
@@ -47,19 +47,21 @@ const GameCardWrapperContent = styled.div`
   background-color: var(--color-2);
   -webkit-box-shadow: 0px 0px 5px 0px var(--color-4);
   box-shadow: 0px 0px 5px 0px var(--color-4);
+
+  &:hover {
+    & > div:last-child {
+      display: flex;
+    }
+  }
 `;
 
 const GameCard: React.FC<IGameCardProps> = ({ gameData }) => {
-  const [hoverState, setHoverState] = useState(false);
-
   return (
-    <GameCardWrapper
-      onMouseEnter={() => setHoverState(!hoverState)}
-      onMouseLeave={() => setHoverState(!hoverState)}>
-      <GameCardWrapperContent className={hoverState ? 'card-open' : ''}>
-        <GameCardMedia cardHoverState={hoverState} gameData={gameData} />
+    <GameCardWrapper>
+      <GameCardWrapperContent>
+        <GameCardMedia gameData={gameData} />
         <GameCardInfo gameData={gameData} />
-        {hoverState ? <GameCardAdditionalInfo gameData={gameData} /> : null}
+        <GameCardAdditionalInfo gameData={gameData} />
       </GameCardWrapperContent>
     </GameCardWrapper>
   );
