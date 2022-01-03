@@ -24,7 +24,17 @@ export const _errorMessages = {
   inputValueNotCorrect: 'Login or password are not correct.',
 };
 
-export const _listNavTitles = ['Genres', 'Platforms', 'Creators', 'Tags'];
+export const _listNavTitles = {
+  genres: 'Genres',
+  platforms: 'Platforms',
+  creators: 'Creators',
+  tags: 'Tags',
+};
+export const _listAsideTitles = {
+  tags: 'Tags',
+  stores: 'Stores',
+  developers: 'Developers',
+};
 
 export const _localeStorageItems = ['email', 'refreshToken', 'uid'];
 

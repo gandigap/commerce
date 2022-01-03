@@ -74,7 +74,7 @@ const NavList = () => {
 
   return (
     <NavListContainer>
-      {_listNavTitles.map((item: string, index: number) => (
+      {Object.values(_listNavTitles).map((item: string, index: number) => (
         <NavListItem key={`navlink_${item}`}>
           <NavListIconContainer>
             <FontAwesomeIcon className="nav_icon" icon={_listNavIcons[index]} />
