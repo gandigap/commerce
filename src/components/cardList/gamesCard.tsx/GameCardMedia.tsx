@@ -7,6 +7,10 @@ import styled from 'styled-components';
 const GameCardMediaContainer = styled.div`
   position: relative;
   padding-bottom: 60%;
+
+  @media (max-width: 500px) {
+    padding-bottom: 75%;
+  }
 `;
 
 const GameCardMediaSlider = styled.div`
@@ -24,11 +28,10 @@ const GameCardImagePreview = styled.div`
 `;
 
 interface IGameCardMedia {
-  /* cardHoverState: boolean; */
   gameData: IGame;
 }
 
-const GameCardMedia: React.FC<IGameCardMedia> = ({ /* cardHoverState,  */ gameData }) => {
+const GameCardMedia: React.FC<IGameCardMedia> = ({ gameData }) => {
   const sliders = gameData.short_screenshots.map((screenshotData) => {
     return <div key={`${gameData.id}_${screenshotData.id}`} data-src={`${screenshotData.image}`} />;
   });
@@ -40,7 +43,7 @@ const GameCardMedia: React.FC<IGameCardMedia> = ({ /* cardHoverState,  */ gameDa
           backgroundImage: `url(${gameData.background_image})`,
         }}
       />
-      <GameCardMediaSlider /* style={{ width: `${cardHoverState ? '100%' : '0px'}` }} */>
+      <GameCardMediaSlider>
         <AwesomeSlider className="aws-btn" bullets={false}>
           {sliders}
         </AwesomeSlider>
