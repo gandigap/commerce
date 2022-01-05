@@ -28,6 +28,7 @@ const WishList: React.FC = () => {
   const dispatch = useAppDispatch();
   const handleDelete = useCallback(
     (slug) => () => {
+      console.log(slug);
       dispatch(deleteGameFromWishList(slug));
     },
     [deleteGameFromWishList, dispatch],
@@ -51,7 +52,7 @@ const WishList: React.FC = () => {
                 <WishListTableRow key={key}>
                   <WishListTableCell>{value.name}</WishListTableCell>
                   <WishListTableCell>
-                    <WishListButtonDeleteGame onClick={handleDelete(key)}>
+                    <WishListButtonDeleteGame onClick={handleDelete(value)}>
                       ✖
                     </WishListButtonDeleteGame>
                   </WishListTableCell>
