@@ -21,11 +21,19 @@ const GameTitle = styled.h2`
 
 const GameMainInfo = styled.div`
   width: 60%;
-  min-width: 500px;
+  
+
+  @media (max-width: 768px) {
+    width: auto;
+  }
 `;
 const GameAdditionalInfo = styled.div`
   width: 35%;
-  min-width: 300px;
+  
+
+  @media (max-width: 768px) {
+    width: auto;
+  }
 `;
 
 const GameDescription = styled.div`
