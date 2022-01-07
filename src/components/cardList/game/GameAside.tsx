@@ -5,13 +5,8 @@ import { IData } from 'interfaces/dataInterfaces';
 import styled from 'styled-components';
 import GameAsideItem from './GameAsideItem';
 
-const GameAsideContainer = styled.aside`
-  
+const GameAsideContainer = styled.aside`  
   padding-bottom: 20px;
-
-    @media (max-width: 768px) {
-    
-  }
 `;
 
 const GameAsideTitle = styled.h3`
