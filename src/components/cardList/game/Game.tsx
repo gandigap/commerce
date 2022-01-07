@@ -20,8 +20,7 @@ const GameTitle = styled.h2`
 `;
 
 const GameMainInfo = styled.div`
-  width: 60%;
-  
+  width: 60%;  
 
   @media (max-width: 768px) {
     width: auto;
@@ -30,7 +29,6 @@ const GameMainInfo = styled.div`
 const GameAdditionalInfo = styled.div`
   width: 35%;
   
-
   @media (max-width: 768px) {
     width: auto;
   }
