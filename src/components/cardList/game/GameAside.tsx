@@ -6,8 +6,12 @@ import styled from 'styled-components';
 import GameAsideItem from './GameAsideItem';
 
 const GameAsideContainer = styled.aside`
-  min-width: 300px;
+  
   padding-bottom: 20px;
+
+    @media (max-width: 768px) {
+    
+  }
 `;
 
 const GameAsideTitle = styled.h3`
