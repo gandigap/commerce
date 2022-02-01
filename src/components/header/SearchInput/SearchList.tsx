@@ -8,7 +8,7 @@ import SearchListItem from './SearchListItem';
 
 const SearchListContainer = styled.ul`
   position: absolute;
-  z-index: 2;
+  z-index: 15;
   top: 100%;
   display: flex;
   flex-direction: column;
