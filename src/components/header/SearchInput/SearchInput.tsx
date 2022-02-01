@@ -14,7 +14,7 @@ const SearchInputContainer = styled.div`
   width: 500px;
   height: 50px;
   margin: 0 50px;
-  display: flex;   
+  display: flex;
   background-color: var(--color-3);
 
   @media (max-width: 992px) {
@@ -25,8 +25,8 @@ const SearchInputContainer = styled.div`
 const Input = styled.input`
   width: 100%;
   height: 100%;
-   padding: 0 12px 0 38px;
-  border: none; 
+  padding: 0 12px 0 38px;
+  border: none;
   background: url('${SearchIcon}') no-repeat scroll 16px;
   background-size: 14px;
   background-color: hsla(0, 0%, 100%, 0.16);
@@ -38,7 +38,8 @@ const Input = styled.input`
   }
 
   &::placeholder {
-      color: var(--color-5);
+    color: var(--color-5);
+    opacity: 0.5;
   }
 `;
 
