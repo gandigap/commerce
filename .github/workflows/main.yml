@@ -1,22 +1,25 @@
-name: GitHub Actions Demo
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
+
 jobs:
-  init:
+  build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-varsion: [ 17.x ]
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Staring Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: install modules
-        run: npm install
-      - name: build project
-        run: npm run build
+    - uses: actions/checkout@v3
+    
+    - name: Install NodeJS
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16.16.0'
+        cache: 'yarn'
+    
+
+    - name: Install dependencies
+      run: yarn install
+
+    - name Build React App
+      run:yarn build 
