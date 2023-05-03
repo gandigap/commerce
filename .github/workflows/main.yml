@@ -1,3 +1,4 @@
+name: GitHub Actions Demo
 on:
   push:
     branches: [ main ]
@@ -7,7 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     
@@ -21,5 +21,6 @@ jobs:
     - name: Install dependencies
       run: yarn install
 
-    - name Build React App
-      run:yarn build 
+    - name: Build dependencies
+      run: yarn build
+
