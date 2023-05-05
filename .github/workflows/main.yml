@@ -9,18 +9,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Install NodeJS
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16.16.0'
-        cache: 'yarn'
-    
+      - uses: actions/checkout@v3
+      
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.16.0'
+          cache: 'yarn'
+      
 
-    - name: Install dependencies
-      run: yarn install
+      - name: Install dependencies
+        run: yarn install
 
-    - name: Build dependencies
-      run: yarn build
+      - name: Build dependencies
+        run: yarn build
+
+      - name: Test dependencies
+        run: yarn test
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
